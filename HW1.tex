@@ -1,0 +1,272 @@
+\input{preamble.tex}
+\usepackage[T1]{fontenc}
+
+%\usepackage{fouriernc}
+
+\usepackage{thmtools}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{csquotes}
+\newsavebox{\myheadbox}
+\fancyhf{}
+%\begin{flushright}
+\lhead{
+Jonas Conneryd \\ \url{conneryd@kth.se}}
+%\end{flushright}
+\rhead{970731-7559  \\
+\the\year
+}
+\chead{\Large{\textbf{\textsf{Homework 1} \\ \vspace{-4pt}\textsf{\normalsize MM8021 Representation Theory for Finite Groups}}}}
+\cfoot{\thepage}
+\declaretheoremstyle[headfont=\bfseries\sffamily]{normalhead}
+\interfootnotelinepenalty=10000
+%\title{\vspace{-2cm}\textbf{\textsf{ Homework 3}}}
+\date{}
+%\author{Jonas Conneryd \\
+%conneryd@kth.se \\ 970731-7559}
+
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\GL}{\mathsf{GL}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\R}{\mathbb{R}}
+\newcommand{\Res}{\mathsf{Res}^{D_{2n}}_{\langle x\rangle}}
+\newcommand{\triv}{\mathbb{1}}
+\newcommand{\Char}{\mathsf{Char}}
+\newcommand{\Fix}{\mathsf{Fix}}
+\newcommand{\Span}{\mathsf{Span}}
+
+
+\begin{document}
+%\maketitle
+\thispagestyle{fancy}
+\theoremstyle{normalhead}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+
+\begin{problem}
+Let the symmetric group $S_n$ act on the vector space $k^n$ in the usual way: $S_n$ acts on the standard coordinate basis $(e_1, \ldots, e_n)$ by $\sigma e_i=e_{\sigma(i)}$ for $\sigma \in S_n$ and we extend this action to $k^n$ by requiring it to be linear : $\sigma\left(\sum c_i e_i\right) \coloneqq \sum c_i \sigma(e_i)$. 
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}]
+
+\item Let $a\coloneqq (a_1, \ldots, a_n) \in k^n$. Show that $\sigma(a) = (a_{\sigma^{-1}(1)}, \ldots , a_{\sigma^{-1}(n)})$. [So care must be taken when we say \say{$S_n$ acts by permuting the coordinates}.]
+
+\item Show that the resulting representation $\rho: S_n \to \mathsf{GL}(n, k)$ contains a subrepresentation isomorphic to the trivial representation $\mathbb{1}$. 
+\item If $k$ has characteristic zero, show that $\rho = \mathbb{1} \oplus \rho'$ is the direct sum of the trivial representation and a representation $\rho'$ of dimension $n-1$. 
+
+\item Assume $k$ has characteristic 2 and $n = 2$. Show that $\rho$ is not a direct sum of two nontrivial subspaces. In other words, $\rho$ is reducible but not completely reducible. What goes wrong as opposed to \textbf{(c)}?
+
+\item Let $p$ be a prime and assume $k$ has characteristic $p$. Show that $\rho$ is a direct sum as in \textbf{(c)} if and only if $p$ does not divide $n$. 
+
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+\hfill
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
+
+\item We have 
+\[
+\sigma(a) = \sigma\left( \sum_i a_ie_i \right) = \sum_i a_i e_{\sigma(i)}.
+\]
+Since a permutation is a bijection, if we change variable to $j = \sigma^{-1}(i)$, we are simply changing the order of summation. This yields the same summand in a finite sum. Therefore
+\[
+\sigma(a) = \sum_i a_i e_{\sigma(i)} = \sum_j a_j e_{\sigma(j)} = \sum_{\sigma^{-1}(i)} a_{\sigma^{-1}(i)} e_{\sigma(\sigma^{-1}(i))} = \sum_{\sigma^{-1}(i)} a_{\sigma^{-1}(i)} e_{i} = (a_{\sigma^{-1}(1)}, \ldots , a_{\sigma^{-1}(n)}), 
+\]
+as desired.
+
+\item $\rho$ maps the permutations to the appropriate permutation matrices, which are $n\times n$-matrices of rank $n$ whose rows consist of zeros except for a single non-zero element, which is 1. The vector $(1, \ldots, 1) \in k^n$ is an eigenvector of any permutation matrix with eigenvalue 1. Therefore, the subspace spanned by $(1, \ldots, 1)$ constitutes a $S_n$-stable subspace $E$ of $k^n$ on which $S_n$ acts trivially. Therefore $\rho |_E$, the restriction of $\rho$ onto $E$, is a subrepresentation isomorphic to the trivial representation. 
+\item Let $W$ be the orthogonal complement of $E$, so that $E + W = k^n$. Define $\rho' \coloneqq \rho |_W$. Denote $(1, 1, \ldots, 1) \coloneqq 1_n$. $W$ contains precisely the vectors $v$ such that $v\cdot 1_n = 0$, that is, the column sum of all $v\in W$ is 0. The action of $S_n$ on $W$ simply exchanges coordinates, which does not affect the row sum. Therefore $W$ is also $S_n$-stable, so $\rho |_W$ is a subrepresentation. Moreover, $E \oplus W = k^n$ and $E$ has dimension 1 (it has a basis $1_n$), so $W$ has dimension $n-1$. Hence $\rho = \rho |_E \oplus \rho |_W \cong \triv \oplus \rho|_W$, where $\rho|_W$ has dimension $n-1$, as desired.
+
+\item Suppose we can indeed write $\rho$ as the product of two non-trivial subspaces. By Theorem 1.10. in Isaacs, this is equivalent to every $S_n$-stable subspace having a $S_n$-stable complement. Consider the subspace $E$ as in \textbf{(c)}. $E$ is the span of $(1, 1)$, so any candidate $W$ must be a space which is the span of a basis vector $w \in W$ which is linearly independent from $(1, 1)$. That is, $W = \Span((a, b), a \neq b)$. The only choice of $(a, b)$ that makes $W$ $S_n$-stable is putting $b= -a$ (since $S_n$ switches the coordinates of $(a, b)$), but this is not possible since $a = -a$ in characteristic 2, so $(a, -a) \in E$. Hence $E$ has no $S_n$-stable complement, which in turn proves that $\rho$ cannot be written as a direct sum of two nontrivial subspaces. The problem is precisely that $a \neq -a$ in characteristic 0, but not necessarily in other characteristics.
+
+\item Suppose $\rho = \triv \oplus \rho'$, and suppose $p$ does not divide $n$. Again, we have the subspace $E$ spanned by $1_n$. The question is whether we can find $n-1$ linearly independent vectors, all of which are linearly independent to $1_n$, whose span is $G$-stable.   
+
+\marginnote{INTE KLAR. Maschke?} 
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+
+
+\begin{problem}
+Some representations of cyclic and dihedral groups.
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}]
+\item Let $n \geq 2$. Describe $n$ distinct, one-dimensional representations of $\mathbb{Z}/n$ over $\mathbb{C}$ and explain why they are pairwise non-isomorphic. 
+
+\item Let $D_{2n} \coloneqq \langle x, y \mid x^n = y^2 = 1, yxy^{-1} = x^n \rangle$ be the dihedral group of order $2n$. Show that setting 
+\[
+\rho(x) \coloneqq
+\begin{bmatrix}
+\cos(2\pi/n) & -\sin(2\pi/n) \\
+\sin(2\pi/n) & \cos(2\pi/n)
+\end{bmatrix}
+, \quad
+\rho(y) \coloneqq
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+,
+\]
+gives a unique, well-defined representation of $D_{2n}$ over $\mathbb{R}$. 
+
+\item Show that $\rho$ is irreducible over $\C$. [A priori, this is at least as strong as showing that $\rho$ is irreducible over $\R$.]
+
+\item Show that the restriction $\Res$ of $\rho$ to $\langle x \rangle$ is irreducible over $\R$ if and only if $n\geq 3$. 
+
+\item By contrast, show that the same restriction $\Res$ is always reducible over $\C$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+\hfill
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
+\item Since $\Z/n$ is cyclic, any representation is completely determined by its mapping of a generator of $\Z/n$, say 1. The proposed representations are
+\[
+\begin{aligned}
+\rho_k &: \Z/n \to \C, \\
+1 &\mapsto \exp(2\pi i k/n), k = 1, \ldots, n, \\
+\rho_k(l) &= p_k(1)^l.
+\end{aligned}
+\]
+Indeed, this is a representation because 
+\[
+\rho_k(a + b) = \exp(2\pi i k/n)^{a+b}= \exp(2\pi i k/n)^{a} \exp(2\pi i k/n)^{b} = \rho_k(a)\rho_k(b). 
+\]
+These representations are also non-isomorphic because their characters are not equal. This can be seen by considering the character of a generator: $\rho_k(1) = \exp(2\pi i k/n) \neq \exp(2\pi i l/n)$ for $l \neq k, 1 \leq, k, l \leq n$. 
+
+\item We have to verify that $x, y$ and $x^n, $
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+
+
+\begin{problem}
+Let $\rho$ be as in in Problem 1 with $k = \C$. 
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}]
+
+\item Describe explicitly the characted $\chi_\rho$ of $\rho$: Given a permutation $\sigma$, what is the value $\chi_\rho(\sigma)$ in terms of its cycle type?
+
+\item Assume a finite group $G$ acts on a finite set $X$. Let $\Fix (g) \coloneqq \{x\in X\mid gx = x\}$; the fixed points of $g$. What is $\sum_{g\in G}\lvert \Fix{g}\rvert$?
+
+\item Deduce that $[\chi_\rho, \mathbb{1}] = 1$. 
+\item Recall that $G$ acts doubly-transitively on $X$ if the action of $G$ on $X \times X$ has precisely two orbits (necessarily the diagonal and the rest). If $G$ acts doubly-transitively on $X$ and $r$ is the corresponding linear representation of $G$, show that $[\chi_r, \mathbb{1}] = 1 $ and $[\chi_r, \chi_r] = 2$. [Hint: Consider also the character of the linear representation gotten from the action of $G$ on $X\times X$.]
+
+\item Deduce that $[\chi_{\rho'}, \chi_{\rho'}] =1$. 
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+\hfill
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
+\item
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+
+
+\begin{problem}
+Let $k = \C$. Let $\rho$ be the representation of the dihedral group from Problem 2. 
+
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}]
+\item Compute the character of $\rho$. 
+
+\item Let $\chi, \psi$ be one-dimensional characters of a finite group $G$. Show that 
+\[
+(\chi, \psi) = \delta_{\rho, \psi} \coloneqq 
+\begin{cases}
+1, \chi = \psi, 
+0, \text{ otherwise}
+\end{cases}
+\]
+[This is the first orthogonality relation in the special case of one-dimensional characters. You may not cite the general orthogonality relation or use its proof here.]
+\item Let $n \geq 2$. Show that $\sum_{m=1}^n e^{2\pi im/n} = 0$ in two ways: Use \textbf{(b)} and use the polynomial $x^n-1$. 
+\item Show that $[\chi_\rho, \chi_\rho] = 1$. [Hint: Use \textbf{(c)}. I found it helpful to distinguish between the cases $n$ even and $n$ odd.]
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+\hfill
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
+\item
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+
+\begin{problem}
+Assume $k$ is algebraically closed and $\Char(k) \neq 2$. 
+
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}]
+\item Let $(V, \rho)$ be a self-dual irreducible representation of $G$ over $k$. Show that $\rho$ is either symplectic or orthogonal.
+
+\item Assume $(V, \rho)$ is a representation which is both symplectic and orthogonal. Show that $(V, \rho)$ is reducible. 
+
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+\hfill
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
+\item
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+
+\begin{problem}
+Consider the two permutation representations 
+\[
+\rho_1, \rho_2 : \Z/2 \times \Z/2 \to S_6
+\]
+given by 
+\[
+\rho_1 ((1, 0)) = \rho_2((1, 0)) = (12)(34), 
+\]
+while
+\[
+\rho_1 ((0, 1)) = (13)(24), \rho_2((0, 1)) = (12)(56).
+\]
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}]
+\item Show that $\rho_1$ and $\rho_2$ are element-conjugate. 
+\item Show that $\rho_1$ and $\rho_2$ are not globally conjugate.
+
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+\hfill
+\begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
+\item Of the given cases, we need only examine how $\rho_1 ((0, 1))$ relates to $\rho_2((0, 1))$. What we have to show is that there is some $\tau \in S_6$ such that $\tau \rho_2((0, 1)) \tau^{-1} = \rho_1((0, 1))$. Take $\tau = (235)(64)$. Then
+\[
+\tau \rho_2((0, 1)) \tau^{-1} = (235)(64)(12)(56)(64)(532) = (13)(24). 
+\]
+By representations being homomorphisms, we have that $\rho_1((1, 1)) = \rho_1((1, 0) + (0,1)) =  \rho_1((1, 0)) \rho_1((0, 1)) = (12)(34)(13)(24) = (14)(23)$ and $\rho_2((1, 1)) = \rho_2((1, 0) + (0,1)) =  \rho_2((1, 0)) \rho_2((0, 1)) = (12)(34)(12)(56) = (34)(56)$. take $\sigma = (31526)$. Then
+\[
+\sigma\rho_1((1, 1))\sigma^{-1} = (31526)(34)(56)(62513) = (14)(23) = \rho_2((1,1)).
+\]
+Hence we have proved that $\rho_1$ and $\rho_2$ are element-conjugate. 
+
+\item Suppose they are globally conjugate by $\tau$. Then we must have that
+\[
+\begin{aligned}
+\tau \rho_1((0, 1))\tau^{-1} = \rho_2((0, 1)) &\iff \tau (13)(24)\tau^{-1} = (12)(56), \\
+\tau \rho_1((1, 1))\tau^{-1} = \rho_2((1, 1)) &\iff \tau (14)(23)\tau^{-1} = (34)(56). 
+\end{aligned}
+\]
+Now, $(12)(56) = [(13)(24)](34)(56)[(13)(24)]$, so substituting in the above we get
+\[
+\begin{aligned}
+\tau (13)(24)\tau^{-1} &= (13)(24)\tau (14)(23)\tau^{-1} (13)(24) \\
+\iff \tau (13)(24)\tau^{-1} &= (13)(24)\tau (14)(23)\tau^{-1} (13)(24)\tau\tau^{-1}
+\end{aligned}
+\]
+\end{enumerate}
+\end{proof}
+\end{document}
