@@ -1,0 +1,158 @@
+\input{preamble.tex}
+\usepackage[T1]{fontenc}
+
+%\usepackage{fouriernc}
+\usepackage{tikz-cd}
+\usepackage{thmtools}
+\usepackage{fancyhdr}
+\pagestyle{plain}
+\usepackage{csquotes}
+\newsavebox{\myheadbox}
+\fancyhf{}
+%\begin{flushright}
+\lhead{
+Jonas Conneryd \\ \url{conneryd@kth.se}}
+%\end{flushright}
+\rhead{970731-7559  \\
+\the\year
+}
+\chead{\Large{\textbf{\scshape{Lectures } \\ \vspace{-4pt}\scshape{\normalsize MM8021 Representation Theory for Finite Groups}}}}
+\cfoot{\thepage}
+\declaretheoremstyle[headfont=\bfseries\sffamily]{normalhead}
+\interfootnotelinepenalty=10000
+%\title{\vspace{-2cm}\textbf{\textsf{ Homework 3}}}
+\date{}
+%\author{Jonas Conneryd \\
+%conneryd@kth.se \\ 970731-7559}
+
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\GL}{\mathsf{GL}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\R}{\mathbb{R}}
+\newcommand{\Res}{\mathsf{Res}^{D_{2n}}_{\langle x\rangle}}
+\newcommand{\triv}{\mathbb{1}}
+\newcommand{\Char}{\mathsf{Char}}
+\newcommand{\Fix}{\mathsf{Fix}}
+\newcommand{\Span}{\mathsf{Span}}
+\newcommand{\Tr}{\mathsf{Tr}}
+\newcommand{\Aut}{\mathsf{Aut}}
+\let\emph\relax % there's no \RedeclareTextFontCommand
+\DeclareTextFontCommand{\emph}{\bfseries\em}
+
+
+\begin{document}
+%\maketitle
+\thispagestyle{fancy}
+\theoremstyle{normalhead}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{normalhead}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem*{example}{Example}
+
+\section{Lecture 1}
+
+\subsection{The Group Ring}
+\begin{definition}
+Let $G$ be a group, $R$ a commutative ring with unity. The \emph{group ring} $R[G]$ is the set of formal linear combinations $\sum_{g\in G}a_g g$ with $a_g \in R$, such that $a_g = 0$ for all but finitely many $g\in G, a_g\in R$. We can turn $R[G]$ into a ring (commutative iff $G$ abelian) by defining addition componentwise:
+\[
+\sum a_g g + \sum b_g g = \sum (a_g + b_g)g, 
+\]
+as well as multiplying elements $g\in G$ using the group operation in $G$ and extend linearly to $R[G]$.
+\end{definition}
+\begin{example}
+If $R = F$ is a field, then $F[G]$ is an $F$-vector space with basis $G$. 
+\end{example}
+\subsection{Representations}
+Informally, a representation has 4 components: A field $F$, a group $G$, an $F$-vector space $V$, and a group homomorphism $G \overset{\rho}{\to} \Aut(V)$. When $V$ is finite-dimensional, $\Aut(V) = \GL(V)$ and for a basis $a_1, \ldots, a_n$ of $V$ we have that $\GL(V) \cong \GL(n)F$.
+\begin{definition}
+A \emph{representation} of $G$ on $V$ is a homomorphism $G \overset{\rho}{\to} \GL(V)$; equivalently, it is a linear group action of $G$ on $V$. 
+\end{definition}
+\begin{remark}
+The action of $G$ on a set $X$ induces a homomorphism $\rho: G \to S_X$. For a finite set $X$ of size $n$, $S_x \cong S_n$. When $G$ acts on a \textit{vector space} $V$, we want a \textit{linear} action, so we get an induced homomorphism into the automorphism group of $V$.
+\end{remark}
+\begin{definition}
+A \emph{subrepresentation} of $(V, \rho)$ is a vector subspace $W \subseteq V$ which is \emph{$G$-stable}: $g \cdot w \in W \forall g \in G$. 
+\end{definition}
+\begin{definition}
+A representation is \emph{irreducible} or \emph{simple} if its only $G$-stable subspaces are $0$ and $V$. 
+\end{definition}
+\begin{definition}
+A representation is \emph{faithful} (injective) if $\rho: G \to \GL(V)$ is injective.
+\end{definition}
+
+A question that arises is, given $V$ and subspaces $W \in V$, can we find a $G$-stable complement $W'$ such that $W \oplus W'= V$? 
+
+\subsection{Some operations on a representation}
+\begin{definition}
+The \emph{direct sum} of two representations $\rho_1: G \to \GL(V_1), \rho_2: G \to \GL(V_2)$ is 
+\[
+\rho_1 \oplus \rho_2: G \to V_1 \oplus V_2; (\rho_1 \oplus \rho_2)(g) = (\rho_1(g), \rho_2(g)).
+\]
+\end{definition}
+\begin{remark}
+If $\GL(V_1) = (n, F), \GL(V_2) = (m, F)$ then 
+\[
+\rho_1(g) = A; \rho_2(g) = B; (\rho_1 \oplus \rho_2)(g) = 
+\begin{bmatrix}
+A & 0 \\
+0 & B
+\end{bmatrix}
+.
+\]
+\end{remark}
+\subsection{Semisimple representations}
+\begin{theorem}
+TFAE:
+\begin{enumerate}
+    \item $V$ is a direct sum of irreps.
+    \item $V$ is a sum of irreps.
+    \item Every $G$-stable subspace has a $G$-stable complement.
+\end{enumerate}
+\end{theorem}
+\begin{definition}
+If 1.-3. hold, $V$ is \emph{semisimple}. 
+\end{definition}
+\begin{theorem}[Maschke]
+If $F = \C$ or $F$ is algebraically closed and $\Char(F) \not | \lvert G \rvert$, then every representation of the finite group $G$ is semistable.
+\end{theorem}
+
+
+
+
+
+
+
+\section{Lecture 2}
+\subsection{Morphisms of representations}
+\begin{definition}
+A \emph{morphism} between representations $(V, \rho), (W, \sigma)$ is a linear map $\phi: V \to W$ such that the diagram
+\begin{center}
+\begin{tikzcd}
+\arrow[swap,d, "\rho(g)"] V  \arrow[r, "\phi"] & W\arrow[d, "\sigma(g)"] \\
+V \arrow[swap,r, "\phi"] & W
+\end{tikzcd}
+\end{center}
+commutes. We say that the two representations are \emph{equivariant} or \emph{intertwining}. 
+\end{definition}
+\begin{definition}
+Suppose $\rho, \sigma: G \to H$ are group homomorphisms (we are interested in the case of $H = \GL(V)$). We say that $\rho, \sigma$ are \emph{globally conjugate} if $\exists h \in H: \forall g\in G, h\rho(g)h^{-1} = \sigma(g)$. We say that $\rho, \sigma$ are \emph{locally conjugate} if $\forall g \in G \exists h \in H: h_g\rho(g)h_g^{-1} = \sigma(g)$. 
+\end{definition}
+\subsection{Characters}
+
+\begin{definition}
+Given $\rho, G \to \GL(V), V/F$, the \emph{character} of $\rho$ is the function
+\[
+\chi_\rho : G \to F; g \mapsto \Tr(\rho(g)).
+\]
+\end{definition}
+\begin{remark}
+$\rho \cong \sigma \implies \chi_\rho = \chi_\sigma$ since $\Tr(AB) = \Tr(BA)$. 
+\end{remark}
+A natural question to ask is if the converse of the above holds. It turns out that for finite groups and $F = \C$, the answer is \emph{yes}!
+
+\end{document}
