@@ -44,11 +44,13 @@ urlcolor = blue
 
 \usepackage{comment}
 \usepackage{enumitem}
-\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{}
-\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{}
+\titleformat{\section}[block]{\Large\scshape\centering}{\thesection.}{1em}{}
+\titleformat{\subsection}[block]{\Large}{\thesubsection.}{1em}{}
 
 \usepackage{pgfplots}
 \pgfplotsset{compat = 1.15}
+
+\usepackage[T1]{fontenc}
 
 \usepackage{listings}
 \lstset{basicstyle=\ttfamily,breaklines=true}
@@ -68,10 +70,10 @@ urlcolor = blue
 \usepackage{microtype}
 %\usepackage{stix}
 \usepackage[compact,small]{titlesec}
-\titleformat*{\section}{\large\bfseries\sffamily}
+\titleformat*{\section}{\Large\bfseries\scshape}
 
-\titleformat*{\subsection}{\small\bfseries\sffamily}
-\titleformat*{\subsubsection}{\small\bfseries\sffamily}
+\titleformat*{\subsection}{\large\bfseries\scshape}
+\titleformat*{\subsubsection}{\large\bfseries\scshape}
 %\renewcommand{\section}{\section*}
 \newcommand{\ibits}{\{0, 1\}^*}
 %\renewcommand{\familydefault}{\sfdefault}

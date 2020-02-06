@@ -5,10 +5,23 @@
 
 \usepackage{thmtools}
 \usepackage{fancyhdr}
-\pagestyle{fancy}
+
 \usepackage{csquotes}
 \newsavebox{\myheadbox}
+\fancypagestyle{normalpage}
+{
+%\begin{flushright}
+\lhead{
+Jonas Conneryd
+}
+%\end{flushright}
+\rhead{\url{conneryd@kth.se}}
+\chead{MM8021 Representation Theory of Finite Groups}
+\cfoot{\thepage}
+}
 \fancyhf{}
+\fancypagestyle{firstpage}
+{
 %\begin{flushright}
 \lhead{
 Jonas Conneryd \\ \url{conneryd@kth.se}}
@@ -16,8 +29,12 @@ Jonas Conneryd \\ \url{conneryd@kth.se}}
 \rhead{970731-7559  \\
 \the\year
 }
-\chead{\Large{\textbf{\textsf{Homework 1} \\ \vspace{-4pt}\textsf{\normalsize MM8021 Representation Theory for Finite Groups}}}}
+\chead{\Large{\scshape{\textbf{Homework 1} \\ \vspace{-4pt}\normalsize\textbf{ MM8021 Representation Theory of Finite Groups}}}}
 \cfoot{\thepage}
+}
+
+\pagestyle{normalpage}
+
 \declaretheoremstyle[headfont=\bfseries\sffamily]{normalhead}
 \interfootnotelinepenalty=10000
 %\title{\vspace{-2cm}\textbf{\textsf{ Homework 3}}}
@@ -34,11 +51,11 @@ Jonas Conneryd \\ \url{conneryd@kth.se}}
 \newcommand{\Char}{\mathsf{Char}}
 \newcommand{\Fix}{\mathsf{Fix}}
 \newcommand{\Span}{\mathsf{Span}}
-
+\newcommand{\Tr}{\mathsf{Tr}}
 
 \begin{document}
 %\maketitle
-\thispagestyle{fancy}
+\thispagestyle{firstpage}
 \theoremstyle{normalhead}
 \newtheorem{problem}{Problem}
 \newtheorem{lemma}{Lemma}
@@ -135,7 +152,131 @@ Indeed, this is a representation because
 \]
 These representations are also non-isomorphic because their characters are not equal. This can be seen by considering the character of a generator: $\rho_k(1) = \exp(2\pi i k/n) \neq \exp(2\pi i l/n)$ for $l \neq k, 1 \leq, k, l \leq n$.
 
-\item We have to verify that $x, y$ and $x^n, $
+\item We have to verify that $\rho(x), \rho(y)$ fulfil the same relations as $x, y$. We have
+\[
+\begin{aligned}
+\rho(x)^n =
+\left(
+\begin{bmatrix}
+\cos(2\pi/n) & -\sin(2\pi/n) \\
+\sin(2\pi/n) & \cos(2\pi/n)
+\end{bmatrix}
+\right)^n &=
+\begin{bmatrix}
+\cos(2\pi n/n) & -\sin(2\pi n/n) \\
+\sin(2\pi n/n) & \cos(2\pi n/n)
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+= \rho(0), \\
+\rho(y)^2 &=
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+= \rho(0), \\
+\rho(y)\rho(x)\rho(y)^{-1} &=
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+\cos(2\pi/n) & -\sin(2\pi/n) \\
+\sin(2\pi/n) & \cos(2\pi/n)
+\end{bmatrix}
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+\\
+&=
+\begin{bmatrix}
+-\sin(2\pi/n) & \cos(2\pi/n) \\
+\cos(2\pi/n) & \sin(2\pi/n)
+\end{bmatrix}
+= \rho(x)^{-1}, \text{ since} \\
+\begin{bmatrix}
+-\sin(2\pi/n) & \cos(2\pi/n) \\
+\cos(2\pi/n) & \sin(2\pi/n)
+\end{bmatrix}
+\rho(x) &=
+\begin{bmatrix}
+-\sin(2\pi/n) & \cos(2\pi/n) \\
+\cos(2\pi/n) & \sin(2\pi/n)
+\end{bmatrix}
+\begin{bmatrix}
+\cos(2\pi/n) & -\sin(2\pi/n) \\
+\sin(2\pi/n) & \cos(2\pi/n)
+\end{bmatrix}
+\\
+&=
+\begin{bmatrix}
+\cos^2(2\pi/n) + \sin^2(2\pi/n) & 0 \\
+0 & \cos^2(2\pi/n) + \sin^2(2\pi/n)
+\end{bmatrix}
+\\
+&=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+.
+\end{aligned}
+\]
+The first relation $\rho(x)^n = 1$ is indeed in one-to-one correspondence with the relation $x^n = 1$ since $n$ is the smallest non-negative integer $k$ such that $\cos(2\pi k/n), \sin(2\pi k/n) = 1, 0$ respectively which implies that $\rho(x)^k \neq 1$ for $k < n$.
+
+\item Let $\chi_\rho$ be the trace of $\rho$. We know that irreducible representations are characterized by $(\chi_\rho, \chi_\rho) = 1$ over $\C$. We have
+\[
+\begin{aligned}
+(\chi_\rho, \chi_\rho) &= \frac{1}{n}\sum_{g \in D_{2n}}  \chi_\rho(g)\overline{\chi_\rho(g)} = \frac{1}{n}\sum_{j = 1}^n  \chi_\rho(x^i)\overline{\chi_\rho(x^j)} + \frac{1}{n}\sum_{j = 1}^n  \chi_\rho(yx^j)\overline{\chi_\rho(yx^i)} \\
+&= \frac{1}{n}\sum_{j = 1}^n
+\Tr{
+\begin{bmatrix}
+\cos(2\pi j/n) & -\sin(2\pi j/n) \\
+\sin(2\pi j/n) & \cos(2\pi j/n)
+\end{bmatrix}
+}
+\overline{
+\Tr{
+\begin{bmatrix}
+\cos(2\pi j/n) & -\sin(2\pi j/n) \\
+\sin(2\pi j/n) & \cos(2\pi j/n)
+\end{bmatrix}
+}
+} \\
+&+
+\frac{1}{n}\sum_{j = 1}^n
+\Tr{
+\begin{bmatrix}
+\sin(2\pi j/n) & \cos(2\pi j/n) \\
+\sin(2\pi j/n) & -\sin(2\pi j/n)
+\end{bmatrix}
+}
+\overline{
+\Tr{
+\begin{bmatrix}
+\sin(2\pi j/n) & \cos(2\pi j/n) \\
+\sin(2\pi j/n) & -\sin(2\pi j/n)
+\end{bmatrix}
+}
+} \\
+&= \frac{1}{n} \sum_{j = 1}^n \cos^2(2\pi j/n) + \sin^2(2\pi j/n) = \frac{1}{n} \sum_{j = 1}^n = 1.
+\end{aligned}
+\]
+
+\item
 \end{enumerate}
 \end{proof}
 
@@ -149,7 +290,7 @@ Let $\rho$ be as in in Problem 1 with $k = \C$.
 
 \item Describe explicitly the characted $\chi_\rho$ of $\rho$: Given a permutation $\sigma$, what is the value $\chi_\rho(\sigma)$ in terms of its cycle type?
 
-\item Assume a finite group $G$ acts on a finite set $X$. Let $\Fix (g) \coloneqq \{x\in X\mid gx = x\}$; the fixed points of $g$. What is $\sum_{g\in G}\lvert \Fix{g}\rvert$?
+\item Assume a finite group $G$ acts on a finite set $X$. Let $\Fix (g) \coloneqq \{x\in X\mid gx = x\}$; the fixed points of $g$. What is $\sum_{g\in G}\lvert \Fix(g)\rvert$?
 
 \item Deduce that $[\chi_\rho, \mathbb{1}] = 1$.
 \item Recall that $G$ acts doubly-transitively on $X$ if the action of $G$ on $X \times X$ has precisely two orbits (necessarily the diagonal and the rest). If $G$ acts doubly-transitively on $X$ and $r$ is the corresponding linear representation of $G$, show that $[\chi_r, \mathbb{1}] = 1 $ and $[\chi_r, \chi_r] = 2$. [Hint: Consider also the character of the linear representation gotten from the action of $G$ on $X\times X$.]
