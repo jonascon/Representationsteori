@@ -52,7 +52,8 @@ Jonas Conneryd \\ \url{conneryd@kth.se}}
 \newcommand{\Fix}{\mathsf{Fix}}
 \newcommand{\Span}{\mathsf{Span}}
 \newcommand{\Tr}{\mathsf{Tr}}
-
+\newcommand{\Ker}{\mathsf{Ker}}
+\renewcommand{\Im}{\mathsf{Im}}
 \begin{document}
 %\maketitle
 \thispagestyle{firstpage}
@@ -95,7 +96,9 @@ as desired.
 
 \item Suppose we can indeed write $\rho$ as the product of two non-trivial subspaces. By Theorem 1.10. in Isaacs, this is equivalent to every $S_n$-stable subspace having a $S_n$-stable complement. Consider the subspace $E$ as in \textbf{(c)}. $E$ is the span of $(1, 1)$, so any candidate $W$ must be a space which is the span of a basis vector $w \in W$ which is linearly independent from $(1, 1)$. That is, $W = \Span((a, b), a \neq b)$. The only choice of $(a, b)$ that makes $W$ $S_n$-stable is putting $b= -a$ (since $S_n$ switches the coordinates of $(a, b)$), but this is not possible since $a = -a$ in characteristic 2, so $(a, -a) \in E$. Hence $E$ has no $S_n$-stable complement, which in turn proves that $\rho$ cannot be written as a direct sum of two nontrivial subspaces. The problem is precisely that $a \neq -a$ in characteristic 0, but not necessarily in other characteristics.
 
-\item Suppose $\rho = \triv \oplus \rho'$, and suppose $p$ does not divide $n$. Again, we have the subspace $E$ spanned by $1_n$. The question is whether we can find $n-1$ linearly independent vectors, all of which are linearly independent to $1_n$, whose span is $G$-stable.
+\item Suppose $\rho = \triv \oplus \rho'$, and suppose $p$ does not divide $n$. By Maschke's theorem, it follows that every $G$-stable subspace has a $G$-stable complement. Again, we have the $G$-stable subspace $E$ spanned by $1_n$ on which the restriction $\rho|_E$ is isomorphic to the trivial representation. Maschke's theorem thus yields that $E$ has a $G$-stable complement $W$, which must then be of dimension $n-1$ since $E \oplus W = V$. Hence $\rho$ decomposes as $\triv \oplus \rho'$ where $\rho'$ has dimension $n-1$.
+
+For the other direction, we prove the contrapositive, i.e. if $p$ divides $n$ then $\rho$ does not decompose as in \textbf{(c)}. Define $\phi: k^n \to k; v \overset{\phi}{\mapsto} \sum_i v_i$. Clearly, $\Ker(\phi)$ forms a subspace of $k^n$, and $E \subseteq \Ker(\phi)$ since $E$ is spanned by $1_n$ which evaluates to $n = 0$ in $k$ if $\Char(k) = p$ divides $n$. Suppose $\Ker(\phi)$ has a $G$-stable complement $W$. Let $w \in W$. Since $E$ is assumed to not be in $W$, there is a $\rho(g)$ such that $\rho(g)w \neq w$.
 
 \marginnote{INTE KLAR. Maschke?}
 \end{enumerate}
@@ -110,7 +113,7 @@ Some representations of cyclic and dihedral groups.
 \begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}]
 \item Let $n \geq 2$. Describe $n$ distinct, one-dimensional representations of $\mathbb{Z}/n$ over $\mathbb{C}$ and explain why they are pairwise non-isomorphic.
 
-\item Let $D_{2n} \coloneqq \langle x, y \mid x^n = y^2 = 1, yxy^{-1} = x^n \rangle$ be the dihedral group of order $2n$. Show that setting
+\item Let $D_{2n} \coloneqq \langle x, y \mid x^n = y^2 = 1, yxy^{-1} = x^{-1} \rangle$ be the dihedral group of order $2n$. Show that setting
 \[
 \rho(x) \coloneqq
 \begin{bmatrix}
@@ -203,18 +206,18 @@ These representations are also non-isomorphic because their characters are not e
 \\
 &=
 \begin{bmatrix}
--\sin(2\pi/n) & \cos(2\pi/n) \\
-\cos(2\pi/n) & \sin(2\pi/n)
+  \cos(2\pi/n) & \sin(2\pi/n) \\
+  -\sin(2\pi/n) & \cos(2\pi/n)
 \end{bmatrix}
 = \rho(x)^{-1}, \text{ since} \\
 \begin{bmatrix}
--\sin(2\pi/n) & \cos(2\pi/n) \\
-\cos(2\pi/n) & \sin(2\pi/n)
+  \cos(2\pi/n) & \sin(2\pi/n) \\
+  -\sin(2\pi/n) & \cos(2\pi/n)
 \end{bmatrix}
 \rho(x) &=
 \begin{bmatrix}
--\sin(2\pi/n) & \cos(2\pi/n) \\
-\cos(2\pi/n) & \sin(2\pi/n)
+\cos(2\pi/n) & \sin(2\pi/n) \\
+-\sin(2\pi/n) & \cos(2\pi/n)
 \end{bmatrix}
 \begin{bmatrix}
 \cos(2\pi/n) & -\sin(2\pi/n) \\
@@ -237,11 +240,11 @@ These representations are also non-isomorphic because their characters are not e
 \]
 The first relation $\rho(x)^n = 1$ is indeed in one-to-one correspondence with the relation $x^n = 1$ since $n$ is the smallest non-negative integer $k$ such that $\cos(2\pi k/n), \sin(2\pi k/n) = 1, 0$ respectively which implies that $\rho(x)^k \neq 1$ for $k < n$.
 
-\item Let $\chi_\rho$ be the trace of $\rho$. We know that irreducible representations are characterized by $(\chi_\rho, \chi_\rho) = 1$ over $\C$. We have
+\item Let $\chi_\rho$ be the trace of $\rho$. We know that irreducible representations are characterized by $[\chi_\rho, \chi_\rho] = 1$ over $\C$. We have
 \[
 \begin{aligned}
-(\chi_\rho, \chi_\rho) &= \frac{1}{n}\sum_{g \in D_{2n}}  \chi_\rho(g)\overline{\chi_\rho(g)} = \frac{1}{n}\sum_{j = 1}^n  \chi_\rho(x^i)\overline{\chi_\rho(x^j)} + \frac{1}{n}\sum_{j = 1}^n  \chi_\rho(yx^j)\overline{\chi_\rho(yx^i)} \\
-&= \frac{1}{n}\sum_{j = 1}^n
+[\chi_\rho, \chi_\rho] &= \frac{1}{2n}\sum_{g \in D_{2n}}  \chi_\rho(g)\overline{\chi_\rho(g)} = \frac{1}{2n}\sum_{j = 1}^n  \chi_\rho(x^j)\overline{\chi_\rho(x^j)} + \frac{1}{2n}\sum_{j = 1}^n  \chi_\rho(yx^j)\overline{\chi_\rho(yx^j)} \\
+&= \frac{1}{2n}\sum_{j = 1}^n
 \Tr{
 \begin{bmatrix}
 \cos(2\pi j/n) & -\sin(2\pi j/n) \\
@@ -257,7 +260,7 @@ The first relation $\rho(x)^n = 1$ is indeed in one-to-one correspondence with t
 }
 } \\
 &+
-\frac{1}{n}\sum_{j = 1}^n
+\frac{1}{2n}\sum_{j = 1}^n
 \Tr{
 \begin{bmatrix}
 \sin(2\pi j/n) & \cos(2\pi j/n) \\
@@ -272,11 +275,54 @@ The first relation $\rho(x)^n = 1$ is indeed in one-to-one correspondence with t
 \end{bmatrix}
 }
 } \\
-&= \frac{1}{n} \sum_{j = 1}^n \cos^2(2\pi j/n) + \sin^2(2\pi j/n) = \frac{1}{n} \sum_{j = 1}^n = 1.
+&= \frac{1}{2n} \sum_{j = 1}^n 4\cos^2(2\pi j/n). \\
 \end{aligned}
 \]
+We use a result hailing from the famous mathematician Wolf Ramalpha which states that, for $n \geq 2$,
+\[
+\sum_{j=1}^n \cos^2(2\pi j/n) = n/2.
+\]
+It follows that $[\chi_\rho, \chi_\rho] = 1$, so $\rho$ is irreducible over $\C$ as desired.
 
-\item
+
+\item We have that
+\[
+\begin{aligned}
+(\chi_{\Res}, \chi_{\Res})
+&= \frac{1}{n}\sum_{g \in G} \chi_{\rho}(g) \chi_{\rho}(g^{-1}) \\
+&= \frac{1}{n}\sum_{j = 1}^{n} \chi_{\rho}(x^j) \chi_{\rho}(x^{n-j}).
+\end{aligned}
+\]
+For $n = 2$, this is
+\[
+\begin{aligned}
+&\frac{1}{2}\sum_{j = 1}^{2} \chi_{\rho}(x^j) \chi_{\rho}(x^{n-j}) \\
+&= \frac{1}{2}(\chi_{\rho}(x) \chi_{\rho}(x) + \chi(\text{Id})\chi(\text{Id})) \\
+&= \frac{1}{2}(4 + 4),
+\end{aligned}
+\]
+which is 4, not 1. For $n \geq 3$, this is
+\[
+\begin{aligned}
+&\frac{1}{n}\sum_{j = 1}^{n} \chi_{\rho}(x^j) \chi_{\rho}(x^{n-j}) \\
+&= \frac{1}{n}\sum_{j=1}^n \chi_{\rho}(x^j) \chi_{\rho}(x^{n-j}) \\
+&= \frac{1}{n}\sum_{j=1}^n 4\cos(2\pi j/n)\cos(2\pi (n-j)/n). \\
+\end{aligned}
+\]
+\textbf{\emph{This evaluates to 2, not 1, which is unfortunate. There must be something I'm missing.}}
+
+\item This follows from realizing that
+\[
+\begin{aligned}
+[\chi_{\Res}, \chi_{\Res}]
+&=  \frac{1}{n}\sum_{g \in \langle x \rangle}  \chi_\rho(g)\overline{\chi_\rho(g)} \\
+&= \frac{1}{n}\sum_{j = 1}^n  \chi_\rho(x^j)\overline{\chi_\rho(x^j)} \\
+&= 2\frac{1}{2n}\sum_{j = 1}^n  \chi_\rho(x^j)\overline{\chi_\rho(x^j)} \\
+&= 2[\chi_\rho, \chi_\rho] \\
+&= 2.
+\end{aligned}
+\]
+Since $2 \neq 1, \Res$ must be reducible. We could also have noted that all irreducible representations of abelian groups have dimension 1.
 \end{enumerate}
 \end{proof}
 
@@ -288,7 +334,7 @@ The first relation $\rho(x)^n = 1$ is indeed in one-to-one correspondence with t
 Let $\rho$ be as in in Problem 1 with $k = \C$.
 \begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}]
 
-\item Describe explicitly the characted $\chi_\rho$ of $\rho$: Given a permutation $\sigma$, what is the value $\chi_\rho(\sigma)$ in terms of its cycle type?
+\item Describe explicitly the character $\chi_\rho$ of $\rho$: Given a permutation $\sigma$, what is the value $\chi_\rho(\sigma)$ in terms of its cycle type?
 
 \item Assume a finite group $G$ acts on a finite set $X$. Let $\Fix (g) \coloneqq \{x\in X\mid gx = x\}$; the fixed points of $g$. What is $\sum_{g\in G}\lvert \Fix(g)\rvert$?
 
@@ -302,7 +348,22 @@ Let $\rho$ be as in in Problem 1 with $k = \C$.
 \begin{proof}[Solution]
 \hfill
 \begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
-\item
+\item A permutation matrix $\sigma$ has exactly one nonzero element per row, and it is contained in the $i$:th diagonal if and only if it keeps the $i$:th coordinate fixed. Therefore, a permutation on $n$ coordinates that keeps $k$ coordinates fixed has character $k$.
+
+\item By Burnside's lemma, the number of orbits of $G$ in $X$ (denoted by $\lvert X/G \rvert$) is
+\[
+\lvert X/G\rvert = \frac{1}{\lvert G \rvert}\sum_{g\in G} \lvert \Fix(g)\rvert,
+\]
+so $\sum_{g \in G}\lvert \Fix(g)\rvert$ is $\lvert G\rvert \cdot \lvert X/G\rvert$.
+\item A group action $G \curvearrowleft X$ induces a homomorphism $\phi: G \to S_X$, where $S_X$ is the group of permutations of $X$ under function composition, by $g \mapsto \psi_g, \psi_g(x) = g \cdot x$. For the finite case, $S_X = S_n$, where $n = \lvert X \rvert$ and $S_n$ is the group of permutations on $n$ letters. Therefore, we can think of $g \in G$ as permutation matrices acting on the $n$-element vector of elements $x_1, \ldots x_n  \in X$. Then, our reasoning in \textbf{(a)} shows that $\lvert \Fix(g) \rvert$ is the trace of its corresponding permutation matrix $M_g$, since the number of fixed points is the number of coordinates of the vector $(x_1, \ldots, x_n)$ left fixed by the permutation $M_g$. That is,
+\[
+\sum_{g \in G}\lvert \Fix(g) \rvert = \sum_{g\in G} \chi(g).
+\]
+Over $\C$, this expression is equal to $\lvert G\rvert \cdot [\chi_\rho, \triv]$. By \textbf{(b)} (Burnside's lemma does not require that $X$ is finite), we have
+\[
+ \lvert G \rvert[\chi_\rho, \triv] = \sum_{g \in G}\lvert \Fix(g)\rvert = \lvert G\rvert \lvert X/G\rvert,
+\]
+where $\lvert X/G\rvert$ is the number of orbits of $G$ in $X$. But the symmetric group acts transitively on $\C^n$ with the given action, so by the above we get $[\chi, \triv] = 1$.
 \end{enumerate}
 \end{proof}
 
@@ -320,7 +381,7 @@ Let $k = \C$. Let $\rho$ be the representation of the dihedral group from Proble
 \[
 (\chi, \psi) = \delta_{\rho, \psi} \coloneqq
 \begin{cases}
-1, \chi = \psi,
+1, \chi = \psi, \\
 0, \text{ otherwise}
 \end{cases}
 \]
@@ -333,7 +394,18 @@ Let $k = \C$. Let $\rho$ be the representation of the dihedral group from Proble
 \begin{proof}[Solution]
 \hfill
 \begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
-\item
+\item The details of this calculation are covered in problem 2. The trace of $x^j$ is $2\cos(2\pi j/n)$ and the trace of $yx^j$ is 0.
+
+\item We have that
+\[
+(\chi, \psi) =
+\]
+
+\item Note that $\sum_{m=1}^ne^{2\pi i m/n} = [\rho, \triv]$, where $\rho$ is the restricted representation of $\langle x \rangle$ from the dihedral group from problem 2, but over the complex numbers $(x^m \mapsto e^{2\pi i m/n})$, and $1$ is the trivial representation of the restricted group $\langle x \rangle$ from the same problem. By \textbf{(b)}, their sum must be 0.
+
+One can also view this as a geometric series $\sum_{m=1}^n\rho(1)^m$ which by standard methods is equal to $\rho(1)(\rho(1)^n - 1)/(\rho(1) -1)$. Since $\rho$ is a one-dimensional representation and $x^n = 1$ in $\langle x \rangle$, we have that $\rho(1)^n = 1$ in $\C*$, so the sum evaluates to 0.
+
+\item I did this in Problem 2.
 \end{enumerate}
 \end{proof}
 
@@ -354,7 +426,7 @@ Assume $k$ is algebraically closed and $\Char(k) \neq 2$.
 \begin{proof}[Solution]
 \hfill
 \begin{enumerate}[font=\normalfont,label=\textbf{(\alph*)}, wide]
-\item
+\item Suppose $(V, \rho)$ is self-dual. Then, for all $g \in G$, we have that $\rho(g^{-1})^T = \rho(g)$.
 \end{enumerate}
 \end{proof}
 
@@ -388,7 +460,16 @@ while
 \[
 \tau \rho_2((0, 1)) \tau^{-1} = (235)(64)(12)(56)(64)(532) = (13)(24).
 \]
-By representations being homomorphisms, we have that $\rho_1((1, 1)) = \rho_1((1, 0) + (0,1)) =  \rho_1((1, 0)) \rho_1((0, 1)) = (12)(34)(13)(24) = (14)(23)$ and $\rho_2((1, 1)) = \rho_2((1, 0) + (0,1)) =  \rho_2((1, 0)) \rho_2((0, 1)) = (12)(34)(12)(56) = (34)(56)$. take $\sigma = (31526)$. Then
+By representations being homomorphisms, we have that
+
+\[
+\rho_1((1, 1)) = \rho_1((1, 0) + (0,1)) =  \rho_1((1, 0)) \rho_1((0, 1)) = (12)(34)(13)(24) = (14)(23)
+\]
+and
+\[
+\rho_2((1, 1)) = \rho_2((1, 0) + (0,1)) =  \rho_2((1, 0)) \rho_2((0, 1)) = (12)(34)(12)(56) = (34)(56).
+\]
+Take $\sigma = (31526)$. Then
 \[
 \sigma\rho_1((1, 1))\sigma^{-1} = (31526)(34)(56)(62513) = (14)(23) = \rho_2((1,1)).
 \]
@@ -401,13 +482,17 @@ Hence we have proved that $\rho_1$ and $\rho_2$ are element-conjugate.
 \tau \rho_1((1, 1))\tau^{-1} = \rho_2((1, 1)) &\iff \tau (14)(23)\tau^{-1} = (34)(56).
 \end{aligned}
 \]
-Now, $(12)(56) = [(13)(24)](34)(56)[(13)(24)]$, so substituting in the above we get
+This would mean
 \[
 \begin{aligned}
-\tau (13)(24)\tau^{-1} &= (13)(24)\tau (14)(23)\tau^{-1} (13)(24) \\
-\iff \tau (13)(24)\tau^{-1} &= (13)(24)\tau (14)(23)\tau^{-1} (13)(24)\tau\tau^{-1}
+\tau (13)(24)\tau^{-1}\tau (14)(23)\tau^{-1} &= (12)(56)(34)(56).
 \end{aligned}
 \]
+By decomposition into disjoint cycles, this is equivalent to
+\[
+\tau (1342)\tau^{-1} = (12)(34)
+\]
+which is impossible since two permutations are conjugate iff they have the same cycle type. Hence $\rho_1, \rho_2$ are not globally conjugate.
 \end{enumerate}
 \end{proof}
 \end{document}

@@ -1,0 +1,169 @@
+\input{preamble.tex}
+\usepackage[T1]{fontenc}
+
+%\usepackage{fouriernc}
+
+\usepackage{thmtools}
+\usepackage{fancyhdr}
+
+\usepackage{csquotes}
+
+\usepackage{polynom}
+\polyset{%
+   style=C,
+   delims={\big(}{\big)},
+   div=:
+}
+
+\newsavebox{\myheadbox}
+\fancypagestyle{normalpage}
+{
+%\begin{flushright}
+\lhead{
+Jonas Conneryd
+}
+%\end{flushright}
+\rhead{\url{conneryd@kth.se}}
+\chead{MM8021 Representation Theory of Finite Groups}
+\cfoot{\thepage}
+}
+\fancyhf{}
+\fancypagestyle{firstpage}
+{
+%\begin{flushright}
+\lhead{
+Jonas Conneryd \\ \url{conneryd@kth.se}}
+%\end{flushright}
+\rhead{970731-7559  \\
+\the\year
+}
+\chead{\Large{\scshape{\textbf{Homework 2} \\ \vspace{-4pt}\normalsize\textbf{ MM8021 Representation Theory of Finite Groups}}}}
+\cfoot{\thepage}
+}
+
+\pagestyle{normalpage}
+
+
+\declaretheoremstyle[headfont=\bfseries\scshape]{normalhead}
+\interfootnotelinepenalty=10000
+%\title{\vspace{-2cm}\textbf{\textsf{ Homework 3}}}
+\date{}
+%\author{Jonas Conneryd \\
+%conneryd@kth.se \\ 970731-7559}
+
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\GL}{\mathsf{GL}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\R}{\mathbb{R}}
+\newcommand{\Res}{\mathsf{Res}^{D_{2n}}_{\langle x\rangle}}
+\newcommand{\triv}{\mathbb{1}}
+\newcommand{\Char}{\mathsf{Char}}
+\newcommand{\Fix}{\mathsf{Fix}}
+\newcommand{\Span}{\mathsf{Span}}
+\newcommand{\Tr}{\mathsf{Tr}}
+\newcommand{\Ker}{\mathsf{Ker}}
+\renewcommand{\Im}{\mathsf{Im}}
+\newcommand{\Cent}{\mathsf{Cent}}
+\newcommand{\Irr}{\mathsf{Irr}}
+
+\begin{document}
+%\maketitle
+\thispagestyle{firstpage}
+\theoremstyle{normalhead}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+
+\begin{problem}[2.3]
+Let $\chi$ be a character of $G$. Define $\det {\chi}: G \to \C$ as follows: Choose $\rho$ affording $\chi$ and set
+\[
+(\det{\chi})(g) = \det{\rho(g)}.
+\]
+Show that $\det{\chi}$ is a uniquely defined linear character of $G$.
+
+\end{problem}
+
+\begin{proof}[Solution]
+
+\end{proof}
+
+\newpage
+
+\begin{problem}[2.4]
+  \hfill
+\begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
+
+
+  \item Let $G$ be a nonabelian group of order 8. Show that $G$ has a unique nonlinear irreducible character $\chi$. Show that $\chi(1) = 2, \chi(z) = -2, \chi(x) = 0$, where $z = G-\{1\}$ and $x\in G-G'$.
+  \item If $G \cong D_8$, show that $\det{\chi} \neq 1_G$.
+  \item If $G \cong Q_8$, show that $\det{\chi} = 1_G$.
+\end{enumerate}
+\textbf{HINT: Show that $\Ker(\det{\chi})$ contains all elements of order 4. Use Lemma 2.15.}
+\end{problem}
+
+\begin{proof}[Solution]
+
+\end{proof}
+
+\newpage
+\begin{problem}[2.5]
+\hfill
+
+\begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
+  \item Find a real representation of $D_8$ which affords the character $\chi$ of problem 2.4 \textbf{(A)}.
+  \item Show that this cannot be done for the group $Q_8$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+
+\end{proof}
+
+\newpage
+\begin{problem}[2.8]
+Let $\chi$ be a faithful character of $G$. Show that $H \subseteq G$ is abelian iff every irreducible constituent of $\chi_H$ is linear.
+\end{problem}
+
+\begin{proof}[Solution]
+
+\end{proof}
+
+\newpage
+\begin{problem}[2.9]
+
+\begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
+  \item Let $\chi$ be a character of an abelin group $A$. Show that
+  \[
+    \sum_{a \in A} \lvert \chi(x)\rvert^2 \geq \lvert A \rvert \chi(1).
+  \]
+  \item Let $A\subseteq G$ with $A$ abelian and $\lvert G : A \rvert = n$. Show that $\chi(1) \leq n$ for all $\chi \in \Irr(G)$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+
+\end{proof}
+
+\newpage
+\begin{problem}[2.10]
+Suppose $G = \bigcup_{i=1}^n A_i$, where the $A_i$ are abelian subgroups of $G$ and $A_i \cap A_j = 1$ if $i \neq j$.
+
+\begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
+  \item Let $\chi \in \Irr(G)$. Show that if $\chi(1) > 1$, then $\chi(1) \geq \lvert G \rvert /(n-1)$.
+  \item If $G$ is nonabelian, then $\lvert A_i \rvert \leq n-1$ for each $i$ and $n-1 \geq \lvert G \rvert^{1/2}$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Solution]
+
+\end{proof}
+
+\newpage
+\begin{problem}[2.11]
+Let $g\in G$. SHow that $g$ is conjugate to $g^{-1}$ in $G$ iff $\chi(g)$ is real for all characters $\chi$ of $G$.
+\end{problem}
+
+\begin{proof}[Solution]
+
+\end{proof}
+
+\end{document}
