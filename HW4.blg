@@ -1,0 +1,9 @@
+[0] Config.pm:304> INFO - This is Biber 2.14
+[0] Config.pm:307> INFO - Logfile is 'HW4.blg'
+[130] biber-MSWIN64:322> INFO - === 
+[164] Biber.pm:415> INFO - Reading 'HW4.bcf'
+[381] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[391] Utils.pm:304> WARN - The file 'HW4.bcf' does not contain any citations!
+[403] bbl.pm:652> INFO - Writing 'HW4.bbl' with encoding 'UTF-8'
+[403] bbl.pm:755> INFO - Output to HW4.bbl
+[407] Biber.pm:128> INFO - WARNINGS: 1

@@ -1,0 +1,540 @@
+\input{preamble.tex}
+\usepackage[T1]{fontenc}
+
+%\usepackage{fouriernc}
+
+\usepackage{thmtools}
+\usepackage{fancyhdr}
+
+\usepackage{csquotes}
+
+\usepackage{polynom}
+\polyset{%
+   style=C,
+   delims={\big(}{\big)},
+   div=:
+}
+
+\newsavebox{\myheadbox}
+\fancypagestyle{normalpage}
+{
+%\begin{flushright}
+\lhead{
+Jonas Conneryd
+}
+%\end{flushright}
+\rhead{\url{conneryd@kth.se}}
+\chead{MM8021 Representation Theory of Finite Groups}
+\cfoot{\thepage}
+}
+\fancyhf{}
+\fancypagestyle{firstpage}
+{
+%\begin{flushright}
+\lhead{
+Jonas Conneryd \\ \url{conneryd@kth.se}}
+%\end{flushright}
+\rhead{970731-7559  \\
+\the\year
+}
+\chead{\Large{\scshape{\textbf{Homework 4} \\ \vspace{-4pt}\normalsize\textbf{ MM8021 Representation Theory of Finite Groups}}}}
+\cfoot{\thepage}
+}
+
+\pagestyle{normalpage}
+
+
+\declaretheoremstyle[headfont=\bfseries\scshape]{normalhead}
+\interfootnotelinepenalty=10000
+%\title{\vspace{-2cm}\textbf{\textsf{ Homework 3}}}
+\date{}
+%\author{Jonas Conneryd \\
+%conneryd@kth.se \\ 970731-7559}
+
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\GL}{\mathsf{GL}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\R}{\mathbb{R}}
+\newcommand{\Res}{\mathsf{Res}}
+\newcommand{\triv}{\mathbb{1}}
+\newcommand{\Char}{\mathsf{Char}}
+\newcommand{\Fix}{\mathsf{Fix}}
+\newcommand{\Span}{\mathsf{Span}}
+\newcommand{\Tr}{\mathsf{Tr}}
+\newcommand{\Ker}{\mathsf{Ker}}
+\renewcommand{\Im}{\mathsf{Im}}
+\newcommand{\Cent}{\mathsf{Cent}}
+\newcommand{\Irr}{\mathsf{Irr}}
+\newcommand{\Std}{\mathsf{Std}}
+\newcommand{\Sym}{\mathsf{Sym}}
+\renewcommand{\SL}{\mathsf{SL}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Class}{\mathsf{Class}}
+\newcommand{\Syl}{\mathsf{Syl}}
+\newcommand{\sgn}{\mathsf{sgn}}
+\begin{document}
+%\maketitle
+\thispagestyle{firstpage}
+\theoremstyle{normalhead}
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}{Lemma}
+
+
+\begin{problem}
+Let $p$ be a prime and let $G$ be a nonabelian group of order $p^3$.
+\begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
+
+
+  \item Show that the center satisfies $\lvert Z(G) \rvert = p$.
+  \item Show that the commutator subgroup equals the center: $G'= Z(G)$.
+  \item Show that the number of conjugacy classes in $G$ is $p^2 + p - 1$.
+  \item Conclude that the dimensions of the irreducible representations of $G$ over $\C$ are as follows: The group $G$ has $p^2$ one-dimensional representations and $p-1$ irreducible characters of dimension $p$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+
+  \hfill
+
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
+
+    \item It is a basic fact of $p$-groups that they have nontrivial center. Moreover, the center cannot be the whole group since $G$ is nonabelian. Suppose $\lvert Z(G)\rvert = p^2$. Then $\lvert G/Z(G) \rvert = p$, so $G/Z(G)$ is cyclic with generator $xZ(G)$. Therefore, for any $g \in G$, we have $gZ(G) = x^mZ(G)$ for some $m$. But if $gZ(G) = x^mZ(G)$, it must be the case that $x^{-m} g \in Z(G)$. In other words, there is some $z\in Z(G)$ such that $x^{-m}g = z$, so $g = x^m z$. Now take $g$, $h$ in $G$. We have that for some $z, w \in Z(G)$ and integers $m, k$ it holds that $g = x^m z, h = x^k w$ which implies that $gh = x^mzx^kw$. But $z, w$ are in the center of $G$, so $gh = x^mzx^kw = x^{m+k}zw = x^{k+m}wz = x^kwx^mz = hg$. We assumed $G$ is nonabelian, so this is a contradiction. Therefore the only possibility is that $\lvert Z(G) \rvert = p$.
+
+    \item Let $G'$ denote the commutator subgroup. We know that $G/Z$ is abelian by the previous assignment. Since the commutator subgroup $G'$ is the smallest subgroup of $G$ such that $G/G'$ is abelian, we must have that $G'$ is a subgroup of $Z(G)$. Moreover $G'$ cannot be trivial since $G$ is not abelian while $G/G'$ is abelian by definition. Since $Z(G)$ is of prime order $p$ and therefore has no nontrivial subgroups, it follows that $Z(G)=G'$.
+
+    \item We will use the fact that $\chi(1)\mid \lvert G \rvert$ if $\chi$ is irreducible. This fact is not too hard to prove and is shown in a few lines in Isaacs: Recall that we defined a homomorphism $\omega_\chi$, going from the center of the group ring $\C[G]$ to $\C$, defined by $\omega(z) = \epsilon$, where $\epsilon_\chi$ is such that $\rho(z) = \epsilon I$ for some representation $\rho$ affording $\chi$. Recall that the class sum of a conjugacy class $\mathcal{K}_i$ is the sum $K_i = \sum_{g\in \mathcal{K}_i} g$, and that the class sums of $G$ define a basis for the center of the group ring $\C[G]$. Let $\rho$ be a representation affording $\chi$. We have that $\rho(K) = \omega_\chi I$, so taking traces we find $\omega_\chi(K)\chi(i)= \chi(K) = \sum_{k \in \mathcal{K_i}} \chi(k) = \lvert \mathcal{K}_i \rvert \chi(g)$, where $g$ is a representative of $\mathcal{K}_i$. We know from class that $\omega_\chi(g)$ are algebric integers. The first orthogonality relation says
+    \[
+      \lvert G \rvert = \sum_{g \in G} \chi(g)\chi(g^{-1}) = \sum_{i = 1}^r \lvert \mathcal{K}_i \rvert \chi(g_i) \chi(g_i^{-1}) = \sum_{i = 1}^r \chi(1) \omega(K_i) \chi(g_i^{-1}).
+    \]
+    Dividing by $\chi(1)$ we find
+    \[
+    \lvert G \rvert/\chi(1) = \sum_{i = 1}^r \omega(K_i) \chi(g_i^{-1}).
+    \]
+    The right hand side is an algebraic integer, and the left hand side is a rational number. It follows from general facts of algebraic integers that $\lvert G \rvert/\chi(1)$ is actually in $\Z$. The proof is complete.
+
+
+    Now onto the assignment. Lemma 2.23 b) in Isaacs states that $\lvert G : G'\rvert$ is the number of linear characters of $G$. Therefore there are $p^2$ linear characters in $G$. By the second orthogonality relation we have
+  \[
+\lvert G \rvert = p^3 = \sum_{\chi \in \Irr(G)} \chi(1)^2 = p^2 + \sum_{\chi \text{ nonlinear } \in \Irr(G)} \chi(1)^2.
+  \]
+    The dimension of an irrep over an algebraically closed field of characteristic zero divides the order of the group and all the nonlinear characters necessarily have order greater than 1. None of them can have order $p^2$ or $p^3$ since then the equation above would have one or more $p^4$ or $p^6$ terms on the right hand side, which is impossible. It follows that all the nonlinear characters have degree $p$. Therefore the equation above reduces to
+    \[
+    \begin{aligned}
+      \lvert G \rvert = p^3 = \sum_{\chi \in \Irr(G)} \chi(1)^2 = p^2 + \sum_{\chi \text{ nonlinear } \in \Irr(G)} \chi(1)^2 = p^2 + kp^2.
+    \end{aligned}
+    \]
+    The only possible $k$ that solves this equation is $k = p-1$. Therefore there are $p^2 + p-1$ irreducible characters in total, of which $p^2$ are of dimension 1 and $p-1$ are of dimension $p$. Since the number of conjugacy classes of $G$ equals the number of irreducible characters of $G$ over $\C$, it follows that $G$ has $p^2 + p-1$ conjugacy classes.
+
+    \item This was handled in \textbf{(C)}.
+  \end{enumerate}
+\end{proof}
+
+\newpage
+
+\begin{problem}
+Continue to assume $G$ is nonabelian of order $p^3$ as in Problem 1.
+\begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
+
+
+  \item Let $\chi \in \Irr(G)$ be an irreducible character of degree $p$ and let $z\in(Z(G)-\{1\})$. Show that $\chi(z) = p\zeta$ for some primitive $p$:th root of unity $\zeta$. (Recall that since $p$ is prime this means $\zeta^p =1$ but $\zeta \neq 1$.)
+  \item Show that $\chi(g) = 0$ for all $g \in G - Z(G)$.
+  \item For every $1\leq j\leq p-1$, show that there is a unique irreducible character $\chi_j$ of degree $p$ such that $\chi_j(z) = \zeta^jp$.
+  \item Conclude that all nonabelian groups of order $p^3$ have the same character table. (No need to write this table out.)
+  \item Show that any irreducible character of $G$ of degree $p$ is faithful.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+  \hfill
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
+
+
+    \item By Corollary 2.30, we have that $\chi(1)^2 \leq \lvert G : Z(\chi) \rvert$. Since $Z(G)$ is contained in $Z(\chi)$ and $\lvert Z(G) \rvert = p$ and $\chi(1) = p$, it follows by Lagrange's theorem that $\lvert Z(\chi)\rvert = \lvert Z(G) \rvert$, so $Z(\chi) = Z(G)$. It follows that $\lvert \chi(z) \rvert = \chi(1)$ for $z\in Z(G)$. Hence $\chi(z) = \chi(1)\zeta$, where $\zeta$ has magnitude 1. By lemma 2.27 c), we have that $\Res^{G}_{Z_G}\chi = \chi(1) \lambda$, where $\lambda$ is a linear character of $Z(G)$. Then $\chi(1) = \chi(z^p) = \chi(1) \lambda(z^p) = \chi(1) \lambda(z)^p = \chi(1)\zeta^p$, so $\zeta^p = 1$. Since $p$ is prime, this means that either $\zeta$ is a $p$:th root of unity or $\zeta = 1$.
+
+    The information we have gathered thus far suffices to prove \textbf{(B)}, which is done below. We use \textbf{(B)} to prove that $\zeta \neq 1$. Assume $\zeta = 1$ for some $z$ in $Z(G)$. Then it follows that $\zeta = 1$ for all $z \in Z(G)$, since the kernel of $\lambda$ is a subgroup of $Z(G)$ and $\lvert Z(G) \rvert = p$. But then we have that
+\[
+\begin{aligned}
+    [\chi, \triv]
+    &= \frac{1}{\lvert G \rvert}\sum_{g\in G}\chi(g)\triv(g^{-1}) \\
+    &= \{\textbf{(B)}\} = \frac{1}{\lvert G \rvert}\sum_{g\in Z(G)}\chi(g)\triv(g^{-1}) \\
+    &= p\cdot p^2 = p^3 \neq 0,
+\end{aligned}
+\]
+a contradiction since $\chi$ and $\triv$ are irreducible and therefore orthogonal. It follows that $\zeta \neq 1$ and therefore is a root of unity.
+\begin{comment}
+     Lemma 2.15 b) and c) together state that $\chi(z) = p\zeta = \sum_i\epsilon_i$ where $\epsilon_i^p = 1$, since the order of $z$ is $p$ for all $z$ in $Z(G)$. We have that $\chi(z)^p \leq \sum_i \epsilon_i^p = $.
+\end{comment}
+    \item
+    \begin{comment}
+    By Theorem 3.8 in Isaacs, we have that if $g \in \mathcal{K}$, where $\mathcal{K}$ is some conjugacy class, and $(\chi(1), \lvert \mathcal{K}\rvert) = 1$, then either $g \in Z(\chi)$ or $\chi(g) = 0$. We have that $\chi(1) = p$. Since $g \in G-Z(g)$, it must be the case that no element in $Z(G)$ is in the conjugacy class of $g$ (since the only possibility is then that $g$ itself is contained in $Z(G)$). By the orbit-stabilizer theorem, the size of the conjugacy class of $g$ divides $\lvert G \rvert$ so in particular $\lvert K
+\end{comment}
+    By part \textbf{(A)}, $\chi(z) = p\zeta$ for all $z$ in $Z(G)$, where $\zeta$ is a root of unity. It follows that $\chi(z)\overline{\chi(z)}= p^2$ for all $z$ in $Z(G)$.
+    By the first orthogonality relation we have
+    \[
+      \lvert G \rvert = p^3 = \sum_{g \in G} \chi(g)\overline{\chi(g)} = \sum_{g \in G-Z(G)}\chi(g)\overline{\chi(g)} + \sum_{g \in Z(G)}\chi(g)\overline{\chi(g)} = \sum_{g \in G-Z(G)}\chi(g)\overline{\chi(g)} + p\cdot p^2.
+    \]
+    Since $\chi(g)\overline{\chi(g)}$ is always a nonnegative real number, it follows that if $\sum_{g \in G-Z(G)}\chi(g)\overline{\chi(g)} = 0$, as mandated by the equation above, it must be the case that $\chi(g)=0$ for all $g\in G - Z(G)$.
+    \item The $p$:th roots of unity are $\zeta^j$ for $j = 1, 2, \ldots, p-1$. Suppose $\chi$ and $\psi$ are distinct degree $p$ irreducible characters, and suppose $\chi(z) = \psi(z)$. By Lemma 2.27 c), $\Res^G_{Z(G)}(\chi) = p\lambda$ and $\Res^G_{Z(G)}(\psi) = p\gamma$ where $\lambda$ and $\gamma$ are linear, so $\chi(z) = \psi(z) = p\lambda(z) = p \gamma(z)$. It follows that $\chi(z^l) = p\lambda(z)^l = p\gamma(z)^l = \psi(z^l)$, so $\chi =\psi$ on $Z(G)$ since any element in $Z(G)$ generates $Z(G)$. By \textbf{(B)}, this means that $\chi = \psi$ on all of $G$, a contradiction since $\chi$ and $\psi$ were assumed to be distinct. Hence all the irreducible degree $p$ characters take on distinct values on $z \in Z(G)$. Since there are precisely $p-1$ irreducible degree $p$ characters and $p-1$ possible values for the irreducible degree $p$ characters to take on $z$ ($p \zeta^j, j = 1, 2, \ldots, p-1$), it follows that there is a unique irreducible character $\chi_j$ of degree $p$ such that $\chi_j(z) = \zeta^j(p)$.
+
+
+    \item Part \textbf{(C)} applied to all of the elements in the center characterizes all the characters of degree $p$ since there are precisely $p-1$ of them. It remains to characterize the linear characters $\lambda_1, \ldots, \lambda_{p^2}$. The commutator subgroup $G'$ is equal to the center $Z(G)$ by Problem 1. Since $G'$ is the intersection of the kernels of all linear characters, it follows that $\lambda_j(z) = 1$ for all elements in the center of $G$.
+
+    It remains to think about the linear characters. This amounts to thinking about characters of $G/Z(G)$. Note that since $G'=Z(G)$ we have that $G/Z(G)$ is abelian of order $p^2$. There are precisely two abelian groups of order $p^2$, namely $\Z_{p^2}$ and $\Z_p\times \Z_p$. Since we showed in Problem 1 that $G/Z(G)$ is not cyclic, it must be the case that $G/Z(G) \cong \Z_p\times \Z_p$. Now, the irreducible characters of $\Z_p\times \Z_p$ are all linear since $\Z_p\times \Z_p$ is abelian, and there are $p^2$ such characters. It follows by Lemma 2.22 b) and c) that the linear characters of $G$ are those defined by $\chi(g)=\hat{\chi}(gZ(G))$, where $gZ(G)$ are elements in $G/Z(G)$ which is isomorphic to $\Z_p \times \Z_p$ and $\hat{\chi}$ is the characters of $\Z_p \times \Z_p$. We have characterized all characters of $G$ which proves that all nonabelian groups of order $p^3$ have the same character table.
+\begin{comment}
+    By Lemma 2.22, $\lambda_j$ are all constant on cosets of $Z(G)$. The cosets of $Z(G)$ partition $G$ and there are $\lvert G : Z(G)\rvert = p^2$ such cosets, so they are all of size $p$. The cosets can therefore be labelled $g_1Z(G), g_2 Z(G), \ldots, g_{p^2}Z(G)$, and it follows by linearity that $\lambda_j(x_{g_i}) = \lambda_j(g_i)$ for $x_{g_i} \in g_iZ(G)$.
+\end{comment}
+
+
+
+    \item For all degree $p$ characters $\chi$, it certainly holds that $\chi(1) =p$. To see that $\chi$ is faithful, we must show that for no element $g$ in $G-\{1\}$ does it hold that $\chi(g) = \chi(1) = p$. By \textbf{(B)} it suffices to verify that this holds for elements in $Z(G)$. There are $p-1$ elements in $Z(G)$ and by \textbf{(C)} there is a unique irreducible character $\chi_j$ of degree $p$ such that $\chi_j(z) = \zeta^jp$. By Problem 1 \textbf{(D)}, these are all the irreducible characters. Since $\zeta$ is a $p$th primitive root of unity, we cannot have that $\zeta^j = 1$ since $j = 1, \ldots, p-1$. It follows that there is no degree $p$ irreducible character $\chi$ satisfying $\chi(g) = \chi(1)$ for $g\in G-\{1\}$, that is, all irreducible degree $p$ characters of $G$ are faithful.
+
+
+  \end{enumerate}
+\end{proof}
+
+\newpage
+
+\begin{problem}
+  View $S_n$ (resp. $A_n$) as the subgroup of $S_{n+1}$ (resp $A_{n+1}$) fixing $n+1$. Decompose the following restrictions into irreducible characters:
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
+
+
+    \item $\Res^{S_5}_{S_4}(\chi)$ for every $\chi \in\Irr(S_5)$.
+    \item $\Res^{A_5}_{A_4}(\chi)$ for every $\chi \in\Irr(A_5)$.
+    \item $\Res^{S_6}_{S_5}(\Std)$, where $\Std$ is the irreducible character of $S_6$ of degree 5, given by $\Std(\sigma) = \lvert \Fix(\sigma) \rvert - 1$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+  \hfill
+
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
+    \item We use the character table of $S_5$, which is Table 2.9.4 in the course notes. We also use the character table for $S_4$ from page 17 in Isaacs.
+    \begin{itemize}
+    \item The restriction of the trivial character is of course again the trivial character.
+
+    \item The $\sgn$ representation also stays the $\sgn$ representation, which again is irreducible in $S_4$.
+
+    \item Consider $\Res^{S_5}_{S_4}(\Std)$. Upon removing a letter, the number of fixed points decreases by 1 for all permutations. Therefore $\Res^{S_5}_{S_4}(\Std) = \Std_{S_4} + \triv$, where $\triv$ is the trivial character.
+
+    \item By exactly the same reasoning, we have that $\Res^{S_5}_{S_4}(\sgn \otimes \Std) = \sgn_{S_4} + \sgn_{S_4} \otimes \Std_{S_4}$.
+
+    \item The inner product $[\Res^{S_5}_{S_4}(\wedge^2 \Std), \Res^{S_5}_{S_4}(\wedge^2 \Std)]$ is 2, so we know that $\Res^{S_5}_{S_4}(\wedge^2 \Std)$ is the sum of two irreps in $S_4$. Inspection of the character table of $S_4$ together with this result yields that $\Res^{S_5}_{S_4}(\wedge^2 \Std) = \Std_{S_4} + \sgn \otimes \Std_{S_4}$.
+
+    \item The inner product $[\Res^{S_5}_{S_4}(\chi_5), \Res^{S_5}_{S_4}(\chi_5)]$ is 2, so we know that $\Res^{S_5}_{S_4}(\chi_5)$ is the sum of two irreps in $S_4$. Again by inspection of the character table of $S_4$ we find that $\Res^{S_5}_{S_4}(\chi_5) = \chi_3 + \chi_4$, where the indexing of the right hand side is as in Isaacs.
+
+    \item The inner product $[\Res^{S_5}_{S_4}(\sgn \otimes \chi_5), \Res^{S_5}_{S_4}(\sgn \otimes \chi_5)]$ is 2, so we know that $\Res^{S_5}_{S_4}(\chi_5)$ is the sum of two irreps in $S_4$. One final time by inspection of the character table of $S_4$ we find that $\Res^{S_5}_{S_4}(\sgn \otimes \chi_5)] = \chi_3 + \chi_5$, with indexing of the right hand side as in Isaacs.
+    \end{itemize}
+
+    \item We use the character table of $A_5$ from the course notes, Table 4.2.5.
+    \[
+    \begin{array}{|c||c|c|c|c|c|}
+    \hline A_{5} & 1_{(1)}^{(1)} & (123)_{(20)}^{(3)} & (12345)_{(12)}^{(5)} & (12354)_{(12)}^{(5)} & (12)(34)_{(15)}^{(2)} \\
+    \hline \hline \mathsf{Res}_{A_{5}}^{S_{5}} \mathsf{sgn}=\mathsf{Res}_{A_{5}}^{S_{5}} 1=1 & 1 & 1 & 1 & 1 & 1 \\
+    \hline \mathsf{Res}_{A_{5}}^{S_{5}} \mathsf{Std}=\mathsf{Res}_{A_{5}}^{S_{5}} \mathsf{sgn} \mathsf{Std}=\chi_{1} & 4 & 1 & -1 & -1 & 0 \\
+    \hline \mathsf{Res}_{A_{5}}^{S_{5}} \chi_{5}=\mathsf{Res}_{A_{6}}^{S_{5}} \mathsf{sgn} \chi_{5}=\chi_{2} & 5 & -1 & 0 & 0 & 1 \\
+    \hline \chi_{3} & 3 & 0 & \frac{1+\sqrt{5}}{2} & \frac{1-\sqrt{5}}{2} & -1 \\
+    \hline \mathsf{int}((45))^{*} \chi_{3}=\chi_{4} & 3 & 0 & \frac{1-\sqrt{5}}{2} & \frac{1+\sqrt{5}}{2} & -1 \\
+    \hline
+    \end{array}
+    \]
+    It is a fact of group theory that there are 4 conjugacy classes of $A_4$ with representatives $1, (123), (132), (12)(34)$, where $1$ has 1 member, $(123)$ and $(132)$ have 4 members and $(12)(34)$ has 3 members. This fact is used in the inner product calculations but the calculations are omitted for brevity. It is also a fact of group theory that $A_4$ has character table
+    \[
+    \begin{array}{|c||c|c|c|c|}
+      \hline & {[e]} & {[(12)(34)]} & {[(123)]} & {[(132)]} \\
+      \hline \text { Size } & 1 & 3 & 4 & 4 \\
+      \hline \triv & 1 & 1 & 1 & 1 \\
+      \hline \chi_{1} & 1 & 1 & \omega & \omega^{2} \\
+      \hline \chi_{2} & 1 & 1 & \omega^{2} & \omega \\
+      \hline \chi_{3} & 3 & -1 & 0 & 0 \\
+      \hline
+    \end{array}
+    \]
+    which we will use extensively. We have $\omega = -1/2 + i\sqrt{3}/2$. We also designate the nontrivial irreducible characters of $A_5$ by descending order in Table 4.2.5 as $\chi_1, \chi_2, \chi_3,\chi_4,\chi_5$.
+      \begin{itemize}
+        \item The trivial character remains the trivial character.
+
+        \item We have that the inner product $[\Res^{A_5}_{A_4}(\chi_1), \Res^{A_5}_{A_4}(\chi_1))] = 2$. Therefore $\Res^{A_5}_{A_4}(\chi_1)$ is the sum of two irreducible characters in $A_4$. Inspection of the character table of $A_4$ shows that $\chi_1 = \triv_{A_4} + {\chi_3}_{A_4}$.
+
+        \item for $\chi_2$, we have that $[\Res^{A_5}_{A_4}(\chi_2), \Res^{A_5}_{A_4}(\chi_2))] = 3$. Looking at the character table of $A_4$, we have that $\Res^{A_5}_{A_4}(\chi_2) = {\chi_1}_{A_4} + {\chi_2}_{A_4} +  {\chi_3}_{A_4}$.
+
+        \item The inner product $[\Res^{A_5}_{A_4}(\chi_3), \Res^{A_5}_{A_4}(\chi_3)]$ is 1, so $\Res^{A_5}_{A_4}(\chi_3)$ is an irreducible character of $A_4$, namely ${\chi_3}_{A_4}$.
+
+        \item We are in luck and as before have that $[\Res^{A_5}_{A_4}(\chi_4), \Res^{A_5}_{A_4}(\chi_4)]$ is 1, so $\Res^{A_5}_{A_4}(\chi_3)$ is an irreducible character of $A_4$, namely ${\chi_3}_{A_4}$.
+      \end{itemize}
+
+    \item We reiterate the argument from \textbf{(A)}: Upon removing a letter, the number of fixed points of all the permutations in conjugacy classes in $S_5$ which are also in $S_6$ decrease by 1, so $\Res^{S_6}_{S_5}(\Std) = \Std_{S_5} + \triv$, where $\triv$ is the trivial character in $S_5$. We know that both $\Std_{S_5}$ and $\triv$ are irreducible in $S_5$, so we are done.
+
+  \end{enumerate}
+\end{proof}
+
+\newpage
+
+\begin{problem}
+Let $V$ be a representation with character $\chi_V$. Describe the characters of the symmetric cube $\Sym^3(V)$ and the exterior cube $\wedge^3(V)$ in terms of $\chi_V$.
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+We proceed as in 2.7.12 in the course notes: Consider the eigenvalues $(\lambda_1, \ldots, \lambda_d)$ of $g$ acting on $V$. Then the eigenvalues of $g$ acting on $\Sym^n(V)$ are $(\lambda_{i_1}, \ldots, \lambda_{i_n} \mid i_1, \leq \ldots \leq i_n)$. It follows that
+\[
+  \chi_{\Sym^3(V)}(g) = \sum_{i \leq j \leq k}\lambda_i\lambda_j\lambda_k.
+\]
+\begin{comment}
+We have
+\[
+\begin{aligned}
+  \sum_{i \leq j \leq k}\lambda_i\lambda_j\lambda_k &= \sum_{i=j=k} \lambda_i\lambda_j\lambda_k + \sum_{i = j < k}\lambda_i\lambda_j\lambda_k + \sum_{i < j = k}\lambda_i\lambda_j\lambda_k +
+  \sum_{i < j < k}\lambda_i\lambda_j\lambda_k \\
+  &= \sum_{i} \lambda_i^3 + \sum_{i = j < k}\lambda_i\lambda_j\lambda_k + \sum_{i < j = k}\lambda_i\lambda_j\lambda_k +
+  \sum_{i < j < k}\lambda_i\lambda_j\lambda_k.
+\end{aligned}
+\]
+\end{comment}
+We have
+\[
+\begin{aligned}
+\chi_V(g)^3
+&= \left(\sum_i{\lambda_i}\right)^3 = \left(\sum_i{\lambda_i}\right)\left(\sum_j{\lambda_j}\right)\left(\sum_k{\lambda_k}\right) \\
+&= \sum_{i \leq j \leq k} \lambda_i\lambda_j\lambda_k + \sum_{k \leq i \leq j} \lambda_i\lambda_j\lambda_k + \sum_{j \leq k \leq i} \lambda_i\lambda_j\lambda_k +  \sum_{i \leq k \leq j} \lambda_i\lambda_j\lambda_k + \sum_{j \leq k \leq i} \lambda_i\lambda_j\lambda_k + \sum_{k \leq j \leq i} \lambda_i\lambda_j\lambda_k \\
+&- \sum_{k \leq i = j} \lambda_i \lambda_j \lambda_k - \sum_{j \leq i = k} \lambda_i \lambda_j \lambda_k - \sum_{i \leq j = k} \lambda_i \lambda_j \lambda_k - \sum_{k \geq i = j} \lambda_i \lambda_j \lambda_k - \sum_{j \geq i = k} \lambda_i \lambda_j \lambda_k - \sum_{i \geq j = k} \lambda_i \lambda_j \lambda_k \\
+&+ \sum_i\lambda_i^3 \\
+&= 6\chi_{\Sym^3(V)}(g) -\sum_{k \leq i = j} \lambda_i \lambda_j \lambda_k - \sum_{j \leq i = k} \lambda_i \lambda_j \lambda_k - \sum_{i \leq j = k} \lambda_i \lambda_j \lambda_k \\
+&- \sum_{k \geq i = j} \lambda_i \lambda_j \lambda_k - \sum_{j \geq i = k} \lambda_i \lambda_j \lambda_k - \sum_{i \geq j = k} \lambda_i \lambda_j \lambda_k + \sum_i\lambda_i^3
+\end{aligned}
+\]
+Moreover
+\[
+\begin{aligned}
+  \chi_V(g^2)\chi_V(g) &= \left(\sum_i{\lambda_i}^2\right)\left(\sum_j{\lambda_j}\right) = \left(\sum_{i=j}{\lambda_i\lambda_j}\right)\left(\sum_k{\lambda_k}\right) \\
+  &= \sum_{i = j \leq k}\lambda_i\lambda_j\lambda_k + \sum_{i = j \geq k}\lambda_i\lambda_j\lambda_k - \sum_{i = j = k}\lambda_i\lambda_j\lambda_k \\
+  &= \sum_{i = j \leq k}\lambda_i\lambda_j\lambda_k + \sum_{i = j \geq k}\lambda_i\lambda_j\lambda_k - \sum_{i}\lambda_i^3.
+\end{aligned}
+\]
+Therefore
+\[
+\begin{aligned}
+  \chi_V(g)^3 &= 6\chi_{\Sym^3(V)}(g) - 3\chi_V(g^2)\chi_V(g) + 4\sum_i \lambda_i^3 \\
+  &= 6\chi_{\Sym^3(V)}(g) - 3\chi_V(g^2)\chi_V(g) - 2 \chi_V(g^3) \\
+  \implies \chi_{\Sym^3(V)}(g) &= \frac{\chi_V(g)^3 + 3\chi_V(g^2)\chi_V(g) + 2 \chi_V(g^3)}{6}.
+\end{aligned}
+\]
+Now for the action of $g$ on $\wedge^n(V)$: the eigenvalues of $g$ acting on $\wedge^n(V)$ are $(\lambda_{i_1}, \ldots, \lambda_{i_n} \mid i_1, < \ldots < i_n)$. It follows that
+\[
+\begin{aligned}
+\chi_{\wedge^3(V)}(g) &= \sum_{i < j < k} \lambda_i\lambda_j\lambda_k \\
+&= \sum_{i \leq j \leq k} \lambda_i\lambda_j\lambda_k - \sum_{i = j \leq k} \lambda_i\lambda_j\lambda_k - \sum_{i \leq j = k} \lambda_i\lambda_j\lambda_k + \sum_i\lambda_i^3 \\
+&= \chi_{\Sym^3(V)}(g) - \chi_V(g^2)\chi_V(g).
+\end{aligned}
+\]
+It follows that
+\[
+\begin{aligned}
+\chi_V(g)^3 &= \frac{\chi_V(g)^3 -3\chi_V(g^2)\chi_V(g) + 2 \chi_V(g^3)}{6}.
+\end{aligned}
+\]
+
+\end{proof}
+
+\newpage
+
+\begin{problem}
+Let $G = A_5$. For every nontrivial irreducible representation $V$ of $G$ over $\C$, verify explicitly the (a priori) stronger statement that in fact every irreducible representation $W$ is a factor of either $V, \Sym^2(V),$ or $\Sym^3(V)$. Hint: Use the character table.
+\end{problem}
+
+
+\begin{proof}[{\scshape Solution}]
+That the irreducible characters of $G$ factor into the tensor powers is equivalent to the character of the tensor power at hand being able to be written as a sum of the irrecubicle characters of $G$ with all nonnegative integers as coefficients. We are left with checking that all irreducible characters are either in the sum corresponding to a decomposition of $V, \chi_{\Sym^2(V)}$, or $\chi_{\Sym^3(V)}$. The only character appearing in a decomposition of $V$ will be $\chi_V$ since $V$ are all indecomposable.
+
+ The character table of $A_5$ will be helpful and is is Table 4.2.5 in the course notes. It can be seen below:
+\[
+\begin{array}{|c||c|c|c|c|c|}
+\hline A_{5} & 1_{(1)}^{(1)} & (123)_{(20)}^{(3)} & (12345)_{(12)}^{(5)} & (12354)_{(12)}^{(5)} & (12)(34)_{(15)}^{(2)} \\
+\hline \hline \mathsf{Res}_{A_{5}}^{S_{5}} \mathsf{sgn}=\mathsf{Res}_{A_{5}}^{S_{5}} 1=1 & 1 & 1 & 1 & 1 & 1 \\
+\hline \mathsf{Res}_{A_{5}}^{S_{5}} \mathsf{Std}=\mathsf{Res}_{A_{5}}^{S_{5}} \mathsf{sgn} \mathsf{Std}=\chi_{1} & 4 & 1 & -1 & -1 & 0 \\
+\hline \mathsf{Res}_{A_{5}}^{S_{5}} \chi_{5}=\mathsf{Res}_{A_{6}}^{S_{5}} \mathsf{sgn} \chi_{5}=\chi_{2} & 5 & -1 & 0 & 0 & 1 \\
+\hline \chi_{3} & 3 & 0 & \frac{1+\sqrt{5}}{2} & \frac{1-\sqrt{5}}{2} & -1 \\
+\hline \mathsf{int}((45))^{*} \chi_{3}=\chi_{4} & 3 & 0 & \frac{1-\sqrt{5}}{2} & \frac{1+\sqrt{5}}{2} & -1 \\
+\hline
+\end{array}
+\]
+Note that we refer to the nontrivial characters as $\chi_i = \chi_{V_i}$, in descending order. Let their respective representations be denoted $V_1, \ldots, V_4$. We use the formulae $\chi_{\Sym^2(V_i)}(g) = (\chi_{V_i}(g)^2 + \chi_{V_i}(g^2))/2$ and $\chi_{\Sym^3(V)}(g) = (\chi_V(g)^3 + 3\chi_V(g^2)\chi_V(g) + 2 \chi_V(g^3))/6$, the latter coming from Problem 4. The exceptional behaviors to take note of are:
+\begin{itemize}
+   \item For $g \in 1^{(1)}_{(1)}$ we have $g^k = g$ (of course).
+   \item For $g \in (123)^{(3)}_{(20)}$ we have $g^2 \in (123)^{(3)}_{(20)}$ and $g^3 \in 1^{(1)}_{(1)}$.
+   \item For $g \in (12345){(5)}_{(12)}$ we have $g^2, g^3 \in (12354){(5)}_{(12)}$. This can be seen by noting that $(12345)^2 = (13524)$ and $(12345)^3 = (14253)$. Conjugation by a transposition flips two letters in a cycle, so conjugation by an even permutation flips an even number of letters. However, $(13524)$ and $(14253)$ are both three flips away from $(12345$; for example $(12345) \to (12354) \to (14352) \to (14253)$ and $(12345) \to (13245) \to (13542) \to (13524)$, so any conjugate between these must be an odd permutation, which are not in $A_5$. Therefore they are not conjugate to $(12345)$ and must therefore be in $(12354){(5)}_{(12)}$.
+   \item For $g \in (12354){(5)}_{(12)}$ we have $g^2, g^3 \in (12345){(5)}_{(12)}$. This is true for the exact same reason the preceding fact is true.
+   \item For $g \in (12)(34)_{(15)}^{(2)}$ we have $g^2 = 1, g^3 = g$.
+\end{itemize}
+These facts together with the formulae allow us to compute the tensor powers of the nontrivial irreducible characters. I will spare the reader the tedious algebra and summarize the results in a table:
+\[
+\begin{array}{|c||c|c|c|c|c|}
+\hline A_{5} & 1_{(1)}^{(1)} & (123)_{(20)}^{(3)} & (12345)_{(12)}^{(5)} & (12354)_{(12)}^{(5)} & (12)(34)_{(15)}^{(2)} \\
+\hline
+\hline \chi_{\Sym^2(V_1)} & 10 & 1 & 0 & 0 & 2 \\
+\hline \chi_{\Sym^3(V_1)} & 20 & 2 & 0 & 0 & 0 \\
+\hline
+\hline \chi_{\Sym^2(V_2)} & 15 & 0 & 0 & 0 & 3 \\
+\hline \chi_{\Sym^3(V_2)} & 35 & 2 & 0 & 0 & 3 \\
+\hline
+\hline \chi_{\Sym^2(V_3)} & 6 & 0 & 1 & 1 & 2 \\
+\hline \chi_{\Sym^3(V_3)} & 10 & 1 & 0 & 0 & -2 \\
+\hline
+\hline \chi_{\Sym^2(V_4)} & 6 & 0 & 1 & 1 & 2 \\
+\hline \chi_{\Sym^3(V_4)} & 10 & 1 & 0 & 0 & -2 \\
+\hline
+\end{array}
+\]
+Using this data, we employ linear algebra software to solve the linear equation $\mathsf{CharTable}^Tx = b$, where $b$ are the rows of the tensor power table, to find the coefficient vector $x$ of the characters in the factoring of each tensor power. The results are
+\[
+\begin{array}{|c|c|}
+\hline \text{Tensor power} & \text{Decomposition} \\
+\hline
+\hline \chi_{\Sym^2(V_1)}  &  \triv + \chi_1 + \chi_2\\
+\hline \chi_{\Sym^3(V_1)}  &  \triv + 2\chi_1 + \chi_2 + \chi_3 + \chi_4 \\
+\hline
+\hline \chi_{\Sym^2(V_2)} & \triv + \chi_1 + 2 \chi_2 \\
+\hline \chi_{\Sym^3(V_2)} & 2\triv + 3\chi_1 + 3\chi_2 + \chi_3 + \chi_4 \\
+\hline
+\hline \chi_{\Sym^2(V_3)}  & \triv + \chi_2 \\
+\hline \chi_{\Sym^3(V_3)}  & \chi_1 + \chi_3 + \chi_4 \\
+\hline
+\hline \chi_{\Sym^2(V_4)}  & \triv + \chi_2 \\
+\hline \chi_{\Sym^3(V_4)}  & \chi_1 + \chi_3 + \chi_4 \\
+\hline
+\end{array}
+\]
+Inspection of this table confirms that indeed all irreducible characters (including the trivial character) of $G$ appear in the decomposition of either $V_i, \chi_{\Sym^2(V_i)}$, or $\chi_{\Sym^3(V_i)}$ for all the nontrivial irreducible characters $V_i$, and it follows that the irreducible representations of $G$ all factor into either $V_i, \Sym^2(V_i)$, or $\Sym^3(V_i)$. We are done (finally).
+\end{proof}
+
+\newpage
+
+\begin{problem}
+The group $\SL(2, \F_3)$ is ubiquitous because it is a fine subgroup of $\GL(2,\C)$. For example, the group and its 2-dimensional faithful complex representation were used by Andrew Wiles in his proof of Fermat's Last Theorem.
+Let $G = \SL(2, \F_3)$. One has $\lvert G \rvert = 24$.
+\begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
+
+
+  \item Show that $Z(G) = \{\pm I_2\}$.
+  \item Show that $G/Z(G) \cong A_4$. Hint: There are many ways to do this. The first that came to my mind: FInd a set of order 4 on which $G$ acts naturally.
+  \item Show that $G$ has 7 conjugacy classes. for each class, give the order of the elements and the size of the class. Hint: You can do this either with Jordan form, or from knowledge of the conjugacy classes of $A_4$.
+  \item Show that $G$ has no subgroup of order 12.
+  \item Show that $\SL(2, \F_3)$ is solvable. You may use standard facts about solvable groups. (Please state carefully what you are using).
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+
+\end{proof}
+
+\newpage
+
+\begin{problem}
+Compute the character table of $G = \SL(2, \F_3)$. Do not use software.
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+
+\end{proof}
+
+\newpage
+
+\begin{problem}
+Let $G$ be a finite group and let $H$ be a proper subgroup of $G$. Prove Jordan's theorem:
+\[
+  \left\lvert \bigcup_{H' \in \Class(H)} H' \right\rvert \leq \lvert G \rvert - \lvert G:H\rvert +1.
+\]
+\end{problem}
+
+
+\begin{proof}[{\scshape Solution}]
+Suppose $\lvert G : H \rvert = n$. We first prove that there are at most $n$ conjugates of $H$, that is, subgroups of the form $gHg^{-1}$, in $G$: The left cosets of $H$ are $\{g_1H, g_2H, \ldots, g_nH\}$, and these partition $G$. Therefore for every $g$ in $G$ there exists some unique $g_i$ such that $g = g_ih$. Therefore $gHg^{-1} = g_iHg_i^{-1}$. Since $1 \leq i \leq n$, it follows that there are at most $n$ distinct groups of the form $gHg^{-1}$ for some $g \in G$, that is, there are at most $n$ distinct conjugates of $H$ in $G$. These conjugates all have the identity in common, so the size of their union is at most $n\lvert H \rvert - (n-1)$. We have that $n\lvert H \rvert -(n-1) = \lvert G :H \rvert \lvert H\rvert - \lvert G :H \rvert + 1 = \lvert G \rvert - \lvert G :H \rvert + 1$, as desired.
+\end{proof}
+
+\newpage
+  \noindent A pair $(G, H)$ as in Problem 8 is called a \emph{Frobenius pair} if equality holds in the equation of Problem 8. A group $G$ is a \emph{Frobenius group} if it admits a subgroup $H$ such that $(G, H)$ forms a Frobenius pair.
+
+\begin{problem}
+  Let $p$ be a prime. Let $P$ be a $p$-Sylow subgroup of $S_p$ with normalizer $N\coloneqq N_{S_p}(P)$.
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
+
+
+    \item Show that $N$ is a Frobenius group. Hint: Take $H$ to be generated by a $(p-1)$-cycle in $N$.
+    \item Compute the irreducible characters of $N$.
+
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+  \hfill
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
+
+
+    \item Recall that $\lvert S_p \rvert = p!$. Note that there are $(p-1)!$ elements of order $p$ in $S_p$, namely the $p$-cycles. To see this, note that we produce a $p$-cycle as follows: there are $p$ choices for the first letter, $p-1$ choices for the second letter, and ultimately a single choice for the last letter, so there are $p!$ arrangements of $p$ letters which produces a $p$-cycle. Moreover, any cyclic permutation of the letters in an arrangement producing a $p$-cycle will be the same permutation. Since there $p$ cyclic permutations of a given arrangement of $p$ letters, there are $p!/p = (p-1)!$ $p$-cycles in $S_p$. Note now that every $p$-subgroup of $S_p$ contains $p-1$ such elements, and that together the Sylow $p$-subgroups (all of order $p$, of course) contain all the elements of order $p$. It follows that the number $n_p$ of Sylow $p$-subgroups fulfills $(p-1)! = n_p (p-1)$, so $n_p = (p-2)!$. By the third Sylow theorem we have
+    \[
+    \begin{aligned}
+      n_p &= \lvert G \rvert / \lvert N(P)\rvert\\
+\iff (p-2)! &= p! / \lvert N(P)\rvert \\
+      \implies\lvert N(P)\rvert &= p!/(p-2)! = p(p-1).
+    \end{aligned}
+    \]
+    Now take a $p-1$-cycle $\sigma$ in $N$. (I take the phrasing of the assignent to mean that we can assume that one exists. Otherwise it is not hard to show using a direct combinatorial argument.). Consider the subgroup Let $H = \langle \sigma \rangle$. Then $\lvert N \rvert - \lvert N : H\rvert + 1 = p(p-1) - p + 1 = (p-1)^2$. It remains to show that $\lvert \cup_{H' \in \Class(H)} H' \rvert = (p-1)^2$.
+
+\begin{comment}
+    Let $\psi$ be a $p$-cycle generating $P$. In general it holds for subgroups $H, K$ of $N$ that $\lvert HK \rvert = \lvert H\rvert \lvert K \rvert / \lvert H\cap K \rvert$. Therefore $\lvert \langle \sigma \rangle\langle \psi \rangle\rvert  = \lvert \langle \sigma \rangle \rvert\lvert \langle \psi \rangle\rvert/\lvert \langle \sigma \rangle \cap \langle \psi \rangle \rvert = \lvert \langle \sigma \rangle \rvert\lvert \langle \psi \rangle\rvert = p(p-1)$. Hence $N$ is generated by $\sigma$ and $\psi$.
+\end{comment}
+
+    The number of conjugates of $H$ in $N$ is $\lvert N : N_N(H) \rvert$. Since $H$ is contained in $N_N(H)$ and $\lvert N : H \rvert = p$, we must have that either $N_N(H) = H$ or $N_N(H) = N$. However, $N_N(H)$ is not all of $N$: Let $\sigma \in N$ be a generator of $P$. Consider the action of $\psi\sigma\psi^{-1}$ on the letter $l$ not permuted by $\sigma$. It is first taken to $l'$ by $\psi^{-1}$, which is a $p$-cycle and therefore permutes all letters. Then, $l'$ is in fact permuted by $\sigma$ since $\sigma$ is a power of a $p-1$-cycle, say to $l''$. Finally, $\psi$ permutes $l''$. Since $\psi$ must take $l'$ to $l$ to undo the permutation done by $\psi^{-1}$, it cannot also take $l''$ to $l$, since permutations are bijections. Therefore $\psi\sigma\psi^{-1}$ permutes $l$, but no power of $\sigma$ does. It follows that $\psi\sigma\psi^{-1} \not \in H$. Therefore it must be the case that $N_N(H) = H$ and so there are $p$ conjugations of $H$ in $N$.
+
+    The conjugates have only the identity in common: Let $\psi$ be a $p$-cycle generating $P$. In general it holds for subgroups $H, K$ of $N$ that $\lvert HK \rvert = \lvert H\rvert \lvert K \rvert / \lvert H\cap K \rvert$. Therefore $\lvert \langle \sigma \rangle\langle \psi \rangle\rvert  = \lvert \langle \sigma \rangle \rvert\lvert \langle \psi \rangle\rvert/\lvert \langle \sigma \rangle \cap \langle \psi \rangle \rvert = \lvert \langle \sigma \rangle \rvert\lvert \langle \psi \rangle\rvert = p(p-1)$. Hence $N$ is generated by $\sigma$ and $\psi$. We saw that the normalizer of $H$ was $H$ itself and conjugation of $H$ by elements of the form $\sigma^k\psi^l$ yields the same conjugate as conjugation by $\sigma^k$, so it remains to check elements of the form $\sigma^k\psi^l$ and $\psi^l$ (we actually only need $\psi^l$, as we will see). It suffices to check it for generators of $gHg^{-1}$ since the conjugates of $H$ are isomorphic and cyclic, so conjugation maps generators to generators. Suppose $\sigma^k H(\sigma^k)^{-1}$ is not disjoint except for the identity from ${\sigma^k}'H({\sigma'}^k)^{-1}$. Then ${\sigma^k}'h'({\sigma^k}')^{-1} = \sigma^k h(\sigma^k)^{-1}$, for generators $h'$ and $h$. Then $h = {\sigma^k}{''}h'({\sigma^k}{'}')^{-1}$. But $h$ and $h'$ are $p-1$-cycles and $\sigma''$ is a p-cycle, so this is impossible by the same argument as above. We are actually done here: All the $\sigma^k, k = 1, 2, \ldots, p-1$ all give different conjugates of $H$. Since there are $p$ conjugates of $H$, these are all the conjugates and they are mutually disjoint except for the identity.
+
+    All conjugates have $p-1$ elements and have only the identity in common, so $\lvert \cup_{H' \in \Class(H)} H' \rvert = (p-1)(p-1) = (p-1)^2 = \lvert N \rvert - \lvert N : H\rvert + 1$ and the proof is complete.
+
+    \item
+
+    In $S_p$, it holds that two elements are conjugate iff they have the same cycle type. It follows that two conjugate elements in $N$ necesarily have the same cycle type.
+  \end{enumerate}
+\end{proof}
+
+\newpage
+
+\begin{problem}[Isaacs 3.2]
+Let $G$ be a group, $g \in G$, and let $\chi$ be a character of $G$. Suppose $\lvert \chi(g) = 1 \rvert$. Show that $\chi(g)$ is a root of unity.
+
+\noindent\textbf{Hint:} let $E \subseteq \C$ be the splitting field for $x^n-1$ over $\Q$. For integral $\alpha \in E$, with $\lvert \alpha \rvert = 1$, let $f_\alpha \in \Z[x]$ be the polynomial of problem 3.1. Show that only finitely many polynomials can arise this way. Do this by bounding the degree and the coefficients of $f_\alpha$.
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+Let $f_\alpha(x) \in \Q[x]$ be such that $f_\alpha(\alpha) = 0$ for some algebraic integer $\alpha$. It follows from Problem 3.1 that $f_\alpha \in \Z[x]$.
+\end{proof}
+
+\newpage
+
+\begin{problem}[Isaacs 3.3] Show that no simple group can have an irreducible character of degree 2.
+
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+Suppose this is indeed the case, that is, that $G$ is simple with a representation $\rho: G \to \GL(G, C)$ which affords the irreducible character $\chi$ of degree 2. Since $G$ is simple and $\Ker(\rho) \subseteq G$ is normal, $\rho$ must be injective if $\rho$ is not the trivial representation. Since the center of $G$ is the intersection of the kernels of the irreducible characters of $G$, the center of $G$ must also be trivial. The commutator subgroup $G'$ is a normal subgroup and is therefore either trivial or the whole of $G$. If it were trivial, then $G$ would be abelian. This is however not possible by assumption, since abelian groups have only linear characters, which $\chi$ evidently is not. Therefore the commutator subgroup is the whole of $G$. We have that $\det(\chi)$ is a uniquely defined linear character of $G$. It follows by Corollary 2.23 which states that $\lvert G : G'\rvert$ is the number of linear characters in $G$ that $\det(\chi)$ is in fact the only linear character of $G$. Since the trivial character is also always a linear character of $G$, it must be the case that $\det(\chi)$ is the trivial character.
+
+Since $\chi(1) \mid \lvert G \rvert$, we may assume that $\lvert G\rvert$ is even. Therefore $G$ has an element $\zeta$ of order 2 by the first Sylow theorem. By Lemma 2.15, we have that $\rho(\zeta)$ is similar to a diagonal matrix whose diagonal entries are $\epsilon_i, i = 1, 2$, fulfulling that $\epsilon_i^{o(g)} = \epsilon_i^{2} = 1$. Therefore $\epsilon_i = \pm 1$. In addition, $\chi(\zeta) = \sum_i \epsilon_i$. For $\det{\chi}(\zeta)$ to correspond to the trivial character under these conditions, we must have that $\epsilon_1\epsilon_2 = 1$. Since $\rho$ is an injection, we know that $\chi(\zeta) \neq \chi(1) = 2$. Therefore the only possibility is that $\epsilon_1 = \epsilon_2 = -1$, so $\rho(\zeta) = -\triv$. But then $\rho(\zeta)\rho(g) = \rho(g)\rho(\zeta)$ for all $g$ in $G$, which by injectivity implies that $\zeta g = g\zeta$ for all $g$ in $G$. Therefore $\zeta \in Z(G)$. But then $\langle \zeta \rangle$ is a normal subgroup in $G$ of order 2. $\lvert G \rvert \neq 2$ since the only group with two elements is abelian, so we have found a nontrivial normal subgroup to the simple group $G$, a contradiction.
+
+
+\end{proof}
+
+\newpage
+
+\begin{problem}
+Let $\chi$ be the character $\chi(g) = \lvert \Fix(g) \rvert -1$ for the action of $S_5$ on the set $\Syl_5(S_5)$ of its 5-Sylow subgroups. Decompose $\chi$ into irreducible characters.
+
+
+\end{problem}
+
+\begin{proof}[{\scshape Solution}]
+
+\end{proof}
+
+
+
+
+\end{document}

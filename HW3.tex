@@ -73,6 +73,8 @@ Jonas Conneryd \\ \url{conneryd@kth.se}}
 \newtheorem{problem}{Problem}
 \newtheorem{lemma}{Lemma}
 
+\noindent {\large \textbf{I wish I had more time to spend on this assignment. As a result of this lack of time, some solutions are incomplete, and others are nonsensical. I apologize in advance for this.}}
+
 \begin{problem}[2.3]
 Let $\chi$ be a character of $G$. Define $\det {\chi}: G \to \C$ as follows: Choose $\rho$ affording $\chi$ and set
 \[
@@ -82,7 +84,12 @@ Show that $\det{\chi}$ is a uniquely defined linear character of $G$.
 
 \end{problem}
 
-\begin{proof}[Solution]
+\begin{proof}[{\scshape Solution}]
+To prove uniqueness, we must prove that $\det{\chi}$ does not depend on the choice of $\rho$. Let $\rho$ and $\psi$ be representations affording $\chi$. Since $\rho$ and $\psi$ both afford $\chi$, we know that they are similar by Corollary 2.9: $\rho(g) = P\psi(g) P^{-1}$ for some matrix $P$. Then by the multiplicativity of $\det$ we have
+$\det(\rho(g)) = \det(P\psi(g)P^{-1}) = \det(P)\det(\psi(g))\det(P^{-1}) = \det(P)\det(P^{-1})\det(\psi(g)) = \det(P P^{-1})\det(\psi(g)) = \det(\psi(g))$.
+
+Now for the degree of $\det(\chi)$. Any representation $\rho$ has $\rho(1) = \triv$, so $\det{\chi(1)} = \det(\triv) = 1$, so $\det{\chi}$ is linear. Therefore it is a homomorphism from $G$ to $\C$ and thus a character of degree 1.
+
 
 \end{proof}
 
@@ -93,15 +100,59 @@ Show that $\det{\chi}$ is a uniquely defined linear character of $G$.
 \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
 
 
-  \item Let $G$ be a nonabelian group of order 8. Show that $G$ has a unique nonlinear irreducible character $\chi$. Show that $\chi(1) = 2, \chi(z) = -2, \chi(x) = 0$, where $z = G-\{1\}$ and $x\in G-G'$.
+  \item Let $G$ be a nonabelian group of order 8. Show that $G$ has a unique nonlinear irreducible character $\chi$. Show that $\chi(1) = 2, \chi(z) = -2, \chi(x) = 0$, where $z \in G'-\{1\}$ and $x\in G-G'$.
   \item If $G \cong D_8$, show that $\det{\chi} \neq 1_G$.
   \item If $G \cong Q_8$, show that $\det{\chi} = 1_G$.
 \end{enumerate}
-\textbf{HINT: Show that $\Ker(\det{\chi})$ contains all elements of order 4. Use Lemma 2.15.}
+\textbf{HINT: Show that $\Ker(\det{\chi})$ contains all elements of order 4. Use Lemma 2.15.} DIHEDRAL HAR 2 element av order 4, Sym har 6
 \end{problem}
 
-\begin{proof}[Solution]
+\begin{proof}[{\scshape Solution}]
+  \hfill
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
 
+
+    \item Suppose $G$ is nonabelian of order 8. We know by Corollary 2.6. that a group is abelian iff all its irreducible characters are linear, so we know that there is at least one nonlinear irreducible character. Let $k$ be the number of conjugacy classes of $G$, which we know is not 8. Then
+    \[
+    8 = \sum_{i=1}^k \chi_i(1)^2,
+    \]
+    where we know that the $\chi_i(1)$ are integers. There are two possibilities: either there are two conjugacy classes $1, 2$ and both of their characters $\chi_1(1)$ and $\chi_2(1)$ fulfill $ \chi_i(1) =2$, or there is one conjugacy class $i$ with $\chi_i(1)= 2$ and four conjugacy classes who have linear characters. But certainly the trivial character is linear, so the first option is not possible. We conclude that $G$ has a unique nonlinear irreducible character $\chi$ and that $\chi(1) = 2$.
+
+    By Corollary 2.23 we know that $\lvert G : G' \rvert = \text{ the number of linear characters in $G$}$, and by the above paragraph we know that this number is 4. Therefore Lagrange's theorem implies that there are two elements in $G'$, one of which is the identity and one of which we denote by $z$. Certainly no element except for the identity is conjugate to the identity.
+\begin{comment}
+ It is clear that this implies that $z = z^{-1}$.
+    Since the commutator subgroup is normal, $gG'g^{-1} = G'$ for all $g\in G$. However we cannot have $gzg^{-1} = 1$ since $z$ is not the identity, so it follows that $gzg^{-1} = z$ for all $g \in G$.
+\end{comment}
+    Also, by Corollary 2.23, $\chi(z) = 1$ on linear characters. By the second orthogonality relation
+    \[
+    \begin{aligned}
+      0
+      &=  \sum_{\chi' \in \Irr(G)} \chi'(1) \overline{\chi'(z)} \\
+      &= \sum_{\chi' \text{ linear } \in \Irr(G)} \chi'(1) \overline{\chi'(z)} + \chi(1)\overline{\chi(z)}\\
+      &= 4 + 2\overline{\chi(z)}
+    \end{aligned}
+    \]
+    so $\chi(z) = \overline{\chi(z)} = -2$. Finally, by the first orthogonality relation
+    \[
+    \begin{aligned}
+      8 = \lvert G \rvert
+      &= \sum_{g \in G} \chi(g)\chi(g^{-1}) \\
+      &= \sum_{g \in G} \chi(g)\overline{\chi(g)} \\
+      &= \sum_{g \in G'} \chi(g)\overline{\chi(g)} + \sum_{g \in G-G'} \chi(g)\overline{\chi(g)} \\
+      &= 2^2 + (-2)^2 + \sum_{g \in G-G'} \chi(g)\overline{\chi(g)} \\
+      &= 8 + \sum_{g \in G-G'} \chi(g)\overline{\chi(g)},
+    \end{aligned}
+    \]
+    which implies that $\chi(g) = 0$ for all $g \in G-G'$. This completes the proof.
+
+    \item Note that $D_8 = \langle s, r \mid s^2, r^8, srsr \rangle$ has two elements of order 4, namely $r$ and $sr$. Note that $\det{\chi}$ is a linear character. Therefore, for an element $d$ of order 4 we have $1 = \det{\chi}(1) = \det{\chi}(d^4) = \det{\chi}(d)^4$. At the same time, we can write $\chi(d) = \sum_i \varepsilon_i = 0$ and $\det{\chi}(d) = \Pi_i \varepsilon_i$. Therefore we can conclude that $\Pi_i \varepsilon_i$ has modulus 1, which by Lemma 2.15. means that each of the $\varepsilon_i$ have modulus 1. At the same time, their sum is 0. Finally, the $\varepsilon_i$ are all of order 4, so $\chi()$
+
+    The elements of order 4 are all in $G - G'$.
+    \item Recall that $Q_8$ has presentation
+    $\langle \bar{e}, i, j, k \mid \bar{e}^2 = e, i^2 = j^2 = k^2 = ijk = \bar{e} \rangle$ where $\bar{e}$ commutes with the other elements of the group. Suppose we know that all elements of order 4 are in the kernel of $\det{\chi}$. From the relation $i^2 = j^2 = k^2 = ijk = \bar{e}$ we see that we can generate all elements of $Q_8$ from two elements of order four (these are $i, j, k$). Therefore, by linearity of the determinant, it follows that if all elements of order 4 are in the kernel of the determinant $\det{\chi}$, then $\det{\chi}$ is the identity map.
+
+    Note that $\det{\chi}(ijk) = \det{\chi}(i^2) = \det{\chi}(j^2) = \det{\chi}(k^2) = \det{\chi}(\bar{e})$. By linearity all of these must square to 1. But then
+  \end{enumerate}
 \end{proof}
 
 \newpage
@@ -114,8 +165,32 @@ Show that $\det{\chi}$ is a uniquely defined linear character of $G$.
 \end{enumerate}
 \end{problem}
 
-\begin{proof}[Solution]
+\begin{proof}[{\scshape Solution}]
+  \hfill
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
+    \item
+    Recall that the dihedral group $D_8$ has presentation $\langle r, s | s^2, r^4 \rangle$
+    Consider the representation
+    \[
+      \begin{aligned}
+        r \mapsto
+        \begin{bmatrix}
+          0 & -1 \\
+          1 &  0
+        \end{bmatrix}
+        \qquad
+        s \mapsto
+        \begin{bmatrix}
+          1 & 0 \\
+          0 & -1
+        \end{bmatrix}
+        \\
+      \end{aligned}
+    \]
+    It is not hard to see that $G' = \{1, s\}$ and $G-G' = \{r^i, sr^i\}, i < 4$. Seeing that the required trace formulae are satisfied is now a matter of computation, which we omit from this document.
 
+    \item Recall that the $\det(\chi)$ of such a representation is the identity representation.
+  \end{enumerate}
 \end{proof}
 
 \newpage
@@ -123,15 +198,17 @@ Show that $\det{\chi}$ is a uniquely defined linear character of $G$.
 Let $\chi$ be a faithful character of $G$. Show that $H \subseteq G$ is abelian iff every irreducible constituent of $\chi_H$ is linear.
 \end{problem}
 
-\begin{proof}[Solution]
+\begin{proof}[{\scshape Solution}]
+Recall that a group is abelian iff all its irreducible characters are linear, by Corollary 2.6. Suppose $H \subseteq G$ is abelian. Then every irreducible constituent of $\chi_H$ is linear in light of the fact stated above, since they are characters of $H$.
 
+Conversely, suppose every irreducible constituent of $\chi_H$ is linear. Since $\chi$ is faithful over $G$, we get that $\chi_H$ is faithful over $H$. Consider the commutator subgroup $H'$ of $H$. We know that $G' = \cap\{\Ker(\lambda) : \lambda \in \Irr(H), \lambda(1) = 1\}$. Therefore, the commutator subgroup of $H$ is contained in the intersection of the kernels of the (linear) irreducible constituents of $\chi_H$. But the intersection of the kernels of the irreducible constituents of $\chi_H$ is in the kernel of $\chi_H$, and since $\chi_H$ is faithful, $\Ker(\chi_H) = 1$. Therefore the commutator subgroup of $H$ is trivial, so $H$ is abelian.
 \end{proof}
 
 \newpage
 \begin{problem}[2.9]
-
+\hfill
 \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}]
-  \item Let $\chi$ be a character of an abelin group $A$. Show that
+  \item Let $\chi$ be a character of an abelian group $A$. Show that
   \[
     \sum_{a \in A} \lvert \chi(x)\rvert^2 \geq \lvert A \rvert \chi(1).
   \]
@@ -139,8 +216,28 @@ Let $\chi$ be a faithful character of $G$. Show that $H \subseteq G$ is abelian 
 \end{enumerate}
 \end{problem}
 
-\begin{proof}[Solution]
-
+\begin{proof}[{\scshape Solution}]
+  \hfill
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
+    \item By Corollary 2.17, we have that $[\chi, \chi] \geq 1$. Therefore
+    \[
+    \begin{aligned}
+      [\chi, \chi] &= \frac{1}{\lvert A \rvert}\sum_{a \in A} \chi(a)\overline{\chi(a)} = \frac{1}{\lvert A \rvert}\sum_{a \in A} \lvert \chi(a) \rvert^2 \geq 1 \\
+      \iff &\sum_{a \in A} \lvert \chi(a) \rvert^2 \geq \lvert A \rvert.
+    \end{aligned}
+    \]
+    In an abelian group all characters are linear, so $\chi(1) = 1$. Therefore
+    \[
+      \sum_{a \in A} \lvert \chi(a) \rvert^2 \geq \lvert A \rvert = \lvert A \rvert \chi(1).
+    \]
+    The proof is complete.
+    \item Let $\chi \in \Irr(G)$. By part \textbf{(A)} and the first orthogonality relation we have
+    \[
+      \lvert G \rvert = \sum_{g \in G} \lvert \chi(g) \rvert^2 \geq \sum_{a \in A} \lvert \chi(a) \rvert^2 \geq \lvert A \rvert = \lvert A \rvert \chi_H(1).
+    \]
+    Since $A$ is abelian, $A = Z(A)$. By Corollary 2.28,
+\marginnote{EJ KLAR}
+  \end{enumerate}
 \end{proof}
 
 \newpage
@@ -153,17 +250,44 @@ Suppose $G = \bigcup_{i=1}^n A_i$, where the $A_i$ are abelian subgroups of $G$ 
 \end{enumerate}
 \end{problem}
 
-\begin{proof}[Solution]
+\begin{proof}[{\scshape Solution}]
+  \hfill
+  \begin{enumerate}[font=\normalfont,label=\textbf{(\Alph*)}, wide]
+    \item
+    \begin{comment}
 
+    Since all the subgroups are disjoint, we have that $\lvert G \rvert = \sum_i^n \lvert A_i \rvert - (n-1)$. By problem 2.9. we know that $\chi(1) \leq \lvert G : A_i \rvert$ for all $A_i$. If $\chi(1) > 1$, we know that at least one of the $A_i$ has $\lvert A_i \rvert > 1$. Let $A_j$ be of maximal size among the $A_i$. Then $\lvert G \rvert /(n-1) =  \sum_i^n \lvert A_i \rvert/\lvert A_i \rvert - n-1$.
+
+
+    Since the subgroups $A_i$ are abelian, we know that $\chi_{A_i}(1) = 1$. Since the $A_i$ are disjoint and together make up $G$, we have that $\chi(1),  = \sum_{A_i}\chi_{A_i}(1) - n-1(\chi(1)) = n-(n-1)$. Now
+
+
+    By lemma 2.29 we kn
+
+    By the second orthogonality relation
+    \[
+      \lvert G \rvert = \sum_{\Irr(G)}\chi(1)\overline{\chi(1)}.
+    \]
+    The conjugacy classes are precisely the ingoing abelian groups in the union, so
+\end{comment}
+    \item If $G$ is nonabelian, there is at least one irreducible nonlinear character $\chi$. By part \textbf{(A)}, we have that $\chi(1) \geq \lvert G \rvert /(n-1)$. Moreover, by Problem 2.9. we know that $\chi(1) \leq \lvert G : A_i \rvert = \lvert G \rvert / \lvert A_i \rvert $. Therefore $\lvert G \rvert / \lvert A_i \rvert \geq \chi(1) \geq \lvert G \rvert /(n-1)$, so $\lvert A_i \rvert \leq n-1$. It follows immediately that $n-1 \geq \lvert G \rvert /\chi(1)$. By Corollary 2.30 we also have $\chi(1)^2 \leq \lvert G : Z(\chi)\rvert \leq \lvert G \rvert$ for $\chi(g) \in \Irr(G)$, from which it follows that $\chi(1) \leq \lvert G \rvert^{1/2}$. Hence $n-1 \geq \lvert G \rvert /\chi(1) \geq \lvert G \rvert / \lvert G \rvert^{1/2} = \lvert G \rvert^{1/2}$, which is our desired result.
+
+  \end{enumerate}
 \end{proof}
 
 \newpage
 \begin{problem}[2.11]
-Let $g\in G$. SHow that $g$ is conjugate to $g^{-1}$ in $G$ iff $\chi(g)$ is real for all characters $\chi$ of $G$.
+Let $g\in G$. Show that $g$ is conjugate to $g^{-1}$ in $G$ iff $\chi(g)$ is real for all characters $\chi$ of $G$.
 \end{problem}
 
-\begin{proof}[Solution]
+\begin{proof}[{\scshape Solution}]
+Suppose $\chi(g)$ is real for all characters $\chi$ of $G$. In any case, for $\chi = \triv$ we have $\triv(g)\triv(g^{-1}) = \triv(g)\overline{\triv(g)} = 1$. Then we have
+\[
+\sum_{\chi \in \Irr(g)}\chi(g)\overline{\chi(g^{-1})} = \sum_{\chi \in \Irr(g)}\chi(g)^2 > 0,
+\]
+since $\chi(g)$ are real and not all zero because the trivial character is nonzero. By the second orthogonality relation, $g$ and $g^{-1}$ are conjugate in $G$.
 
+Conversely, suppose $g$ and $g^{-1}$ are conjugate in $G$. Then by Theorem 2.2.1. in the course notes, $\chi(g) = \chi(g^{-1})$ for all irreducible characters (and therefore all characters) $\chi$. On the other hand $\chi(g^{-1}) = \overline{\chi(g)}$ for all characters $\chi$, so $\overline{\chi(g)} = \chi(g)$ for all $\chi$. We conclude that $\chi(g)$ is real for all characters. The proof is complete.
 \end{proof}
 
 \end{document}
