@@ -1,10 +1,10 @@
 # Fdb version 3
-["biber HW4"] 1588668911 "HW4.bcf" "HW4.bbl" "HW4" 1588847807
-  "HW4.bcf" 1588847807 101238 7aa391470735496397a335653cc6d242 "pdflatex"
+["biber HW4"] 1588865745 "HW4.bcf" "HW4.bbl" "HW4" 1588930591
+  "HW4.bcf" 1588930590 101238 7aa391470735496397a335653cc6d242 "pdflatex"
   (generated)
   "HW4.bbl"
   "HW4.blg"
-["pdflatex"] 1588847802 "HW4.tex" "HW4.pdf" "HW4" 1588847807
+["pdflatex"] 1588930586 "HW4.tex" "HW4.pdf" "HW4" 1588930591
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/jknappen/ec/ecrm1095.tfm" 993062124 3172 eb6efaa83c6c52473a1c403f376eab0f ""
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/jknappen/ec/ecss0600.tfm" 993062228 3184 1b2a03e8bf5517ec142d218a5f5c5d82 ""
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/jknappen/ec/ecss0800.tfm" 993062232 3132 210522a5f285ef2b785f82479c3624db ""
@@ -309,16 +309,16 @@
   "C:/Users/jonco/AppData/Roaming/MiKTeX/2.9/tex/latex/translator/translator.sty" 1559301244 8691 e154b4b39c7cd1cfa9301a391c44afdd ""
   "C:/Users/jonco/AppData/Roaming/MiKTeX/2.9/tex/latex/url/url.sty" 1388494052 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/jonco/AppData/Roaming/MiKTeX/2.9/tex/latex/xcolor/xcolor.sty" 1463135581 57049 34128738f682d033422ca125f82e5d62 ""
-  "HW4.aux" 1588847807 2581 91bb6b9d3638b860840ae3667e19ad41 "pdflatex"
-  "HW4.bbl" 1588668943 486 f7f239c736cf01ac6ce7bd829f9b3c7b "biber HW4"
-  "HW4.out" 1588847806 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "HW4.run.xml" 1588847807 2305 a913bab8997bf500f4ddfe5970bde170 "pdflatex"
-  "HW4.tex" 1588847801 41526 845e138e5ca9bf869739d73645f1aed0 ""
+  "HW4.aux" 1588930590 2581 ed4e1d6c133cebc036916f73b478a710 "pdflatex"
+  "HW4.bbl" 1588865748 486 f7f239c736cf01ac6ce7bd829f9b3c7b "biber HW4"
+  "HW4.out" 1588930590 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "HW4.run.xml" 1588930590 2305 a913bab8997bf500f4ddfe5970bde170 "pdflatex"
+  "HW4.tex" 1588930584 44647 0023d89f80f4bda97c701a05a15f59b8 ""
   "preamble.tex" 1582544560 3381 5021035fd8fb8221efcd5100310608a9 ""
   (generated)
-  "HW4.log"
   "HW4.pdf"
+  "HW4.aux"
+  "HW4.log"
   "HW4.bcf"
   "HW4.run.xml"
-  "HW4.aux"
   "HW4.out"
